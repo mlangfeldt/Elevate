@@ -9,3 +9,10 @@
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+
+--drop table if exists Course
+--drop table if exists Collection
+--drop table if exists User
+
+-- come back to this (eventually)
+

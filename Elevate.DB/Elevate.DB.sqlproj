@@ -71,5 +71,8 @@
     <None Include="Tables\Course.sql" />
     <None Include="Tables\Collection.sql" />
     <None Include="Tables\User.sql" />
+    <None Include="PostDeploy\DefaultData\Course.sql" />
+    <None Include="PostDeploy\DefaultData\Collection.sql" />
+    <None Include="PostDeploy\DefaultData\User.sql" />
   </ItemGroup>
 </Project>
