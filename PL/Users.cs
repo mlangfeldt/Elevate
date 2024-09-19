@@ -1,6 +1,6 @@
 ﻿namespace PL
 {
-    public class User
+    public partial class Users
     {
         public Guid Id { get; set; }
         public string? Email { get; set; }

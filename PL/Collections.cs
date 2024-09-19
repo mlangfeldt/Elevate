@@ -1,6 +1,6 @@
 ﻿namespace PL
 {
-    public class Collection
+    public partial class Collections
     {
         public Guid Id { get; set; }
         public Guid? CourseId { get; set; }
