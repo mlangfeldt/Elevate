@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PL\PL.csproj" />
+    <ProjectReference Include="..\BL\Elevate.BL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

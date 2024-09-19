@@ -10,9 +10,8 @@
 --------------------------------------------------------------------------------------
 */
 
---drop table if exists Course
---drop table if exists Collection
---drop table if exists User
+drop table if exists tblCourse
+drop table if exists tblCollection
+drop table if exists tblUser
 
--- come back to this (eventually)
 

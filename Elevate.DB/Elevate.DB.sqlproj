@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{e895dfdf-ef09-4d5c-9384-f17dec97ac92}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -68,9 +68,9 @@
     <PostDeploy Include="PostDeploy\Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tables\Course.sql" />
-    <None Include="Tables\Collection.sql" />
-    <None Include="Tables\User.sql" />
+    <None Include="Tables\tblCourse.sql" />
+    <None Include="Tables\tblCollection.sql" />
+    <None Include="Tables\tblUser.sql" />
     <None Include="PostDeploy\DefaultData\Courses.sql" />
     <None Include="PostDeploy\DefaultData\Collections.sql" />
     <None Include="PostDeploy\DefaultData\Users.sql" />

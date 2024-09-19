@@ -1,4 +1,4 @@
-﻿Create Table [dbo].[User](
+﻿Create Table [dbo].[tblUser](
 	[Id] INT Not Null Primary Key,
 	[Email] VARCHAR(50) Not Null,
 	[Password] VARCHAR(50)  Not Null,
