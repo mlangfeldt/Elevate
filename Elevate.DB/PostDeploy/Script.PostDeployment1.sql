@@ -10,5 +10,6 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r ./DefaultData/Course.sql
-:r ./DefaultData/Collection.sql
+:r ./DefaultData/Courses.sql
+:r ./DefaultData/Collections.sql
+:r ./DefaultData/Users.sql
