@@ -2,8 +2,8 @@
 {
     public partial class Collections
     {
-        public Guid Id { get; set; }
-        public Guid? CourseId { get; set; }
-        public Guid? UserId { get; set; }
+        public int Id { get; set; }
+        public int? CourseId { get; set; }
+        public int? UserId { get; set; }
     }
 }
