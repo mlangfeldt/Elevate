@@ -9,7 +9,6 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-
 :r ./DefaultData/Courses.sql
 :r ./DefaultData/Collections.sql
 :r ./DefaultData/Users.sql

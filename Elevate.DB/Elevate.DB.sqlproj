@@ -68,12 +68,13 @@
     <PostDeploy Include="PostDeploy\Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tables\tblCourse.sql" />
-    <None Include="Tables\tblCollection.sql" />
-    <None Include="Tables\tblUser.sql" />
     <None Include="PostDeploy\DefaultData\Courses.sql" />
     <None Include="PostDeploy\DefaultData\Collections.sql" />
     <None Include="PostDeploy\DefaultData\Users.sql" />
-    <None Include="Elevate.DB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\tblCollection.sql" />
+    <Build Include="Tables\tblCourse.sql" />
+    <Build Include="Tables\tblUser.sql" />
   </ItemGroup>
 </Project>
