@@ -10865,6 +10865,20 @@ html {
     height: auto;
 }
 
+.image-pop {
+    border-radius: 15px; 
+    width: 300px; 
+    height: auto; 
+    transition: transform 0.3s ease; 
+    margin-bottom: 15px;
+}
+
+    .image-pop:hover {
+        transform: scale(1.1); 
+    }
+
+
+
 
 
 
