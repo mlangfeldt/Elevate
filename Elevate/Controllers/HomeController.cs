@@ -21,11 +21,15 @@ namespace Elevate.Controllers
         {
             return View();
         }
+        public IActionResult Courses()
+        {
+            return View();
+        }
         public IActionResult Contact()
         {
             return View();
         }
-        public IActionResult Collection()
+        public IActionResult Library()
         {
             return View();
         }
