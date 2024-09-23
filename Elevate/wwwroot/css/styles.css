@@ -10849,6 +10849,26 @@ html {
 
 .custom-navbar {
     background-color: black; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;/*aligns nav bar items vertically*/
 }
+
+.navbar-nav {
+    display: flex;
+    flex-grow: 1; 
+    justify-content: center; /* center vertically */
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+
+
+
+
+
 
 

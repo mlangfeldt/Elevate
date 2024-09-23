@@ -18,7 +18,10 @@
     <header>
         <nav class="navbar navbar-expand-sm custom-navbar border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Elevate</a>
+                <div class="d-flex align-items-center">
+                    <img src="~/images/logo2.png" alt="Logo" class="logo" style="width: 100px; height: 60px;">
+                    <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Elevate</a>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,7 +33,7 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Collection">Your Collection!</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Collection">Library</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
