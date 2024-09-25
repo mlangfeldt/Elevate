@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BL.Models\Elevate.BL.Models.csproj" />
+    <ProjectReference Include="..\BL\Elevate.BL.csproj" />
+    <ProjectReference Include="..\PL\Elevate.PL.csproj" />
+  </ItemGroup>
+
 </Project>

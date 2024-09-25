@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PL;
 
-namespace Elevate.PL; 
+namespace Elevate.PL;
 
 public partial class ElevateEntities : DbContext
 {
@@ -19,54 +15,52 @@ public partial class ElevateEntities : DbContext
     {
     }
 
-    public virtual DbSet<Courses> tblCourses { get; set; }
+    public virtual DbSet<tblCollection> tblCollections { get; set; }
 
-    public virtual DbSet<Collections> tblCollections { get; set; }
+    public virtual DbSet<tblCourse> tblCourses { get; set; }
 
-    public virtual DbSet<Users> tblUsers { get; set; }
+    public virtual DbSet<tblUser> tblUsers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-
-        //remote
-        //optionsBuilder.UseSqlServer("Server=tcp:peerenboom.database.windows.net,1433; Initial Catalog = peerenboom; Persist Security Info = False; User ID = peerenboom; Password =Test123!; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
-        //local
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Elevate.DB;Integrated Security=True");
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Elevate.DB;Integrated Security=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Courses>(entity =>
+        modelBuilder.Entity<tblCollection>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCourses__3214EC07BA3D27D6");
+            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07F8C313BA");
 
-            entity.ToTable("Courses");
+            entity.ToTable("tblCollection");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<tblCourse>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC078E00801A");
+
+            entity.ToTable("tblCourse");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Description)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.Name)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Collections>(entity =>
+        modelBuilder.Entity<tblUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCourses__3214EC0797875A24");
+            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07E2710837");
 
-            entity.ToTable("Collections");
+            entity.ToTable("tblUser");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
-        });
-
-        modelBuilder.Entity<Users>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07B7DF0B2F");
-
-            entity.ToTable("Users");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Email)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -74,14 +68,12 @@ public partial class ElevateEntities : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Password)
-                .HasMaxLength(28)
-                .IsUnicode(false);
-            entity.Property(e => e.Email)
-                .HasMaxLength(255)
+                .HasMaxLength(50)
                 .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);
     }
+
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
