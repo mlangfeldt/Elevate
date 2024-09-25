@@ -1,4 +1,5 @@
 ﻿using BL.Models;
+using Elevate.PL;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -10,214 +11,210 @@ namespace BL
 {
     public class CollectionManager
     {
-    //    public static int Insert(Collection collection, bool rollback = false)
-    //    {
+        public static int Insert(Collection collection, bool rollback = false)
+        {
 
-    //        try
-    //        {
-    //            int results = 0;
-    //            using (ElevateEntities dc = new ElevateEntities())
-    //            {
+            try
+            {
+                int results = 0;
+                using (ElevateEntities dc = new ElevateEntities())
+                {
 
-    //                IDbContextTransaction transaction = null;
-    //                if (rollback) transaction = dc.Database.BeginTransaction();
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
 
-    //                // Make a new tblOrder row
-    //                tblCollection row = new tblCollection();
+                    tblCollection row = new tblCollection();
 
+                    row.Id = dc.tblCollections.Any() ? dc.tblCollections.Max(g => g.Id) + 1 : 1;
+                    row.CourseId = collection.CourseId;
+                    row.UserId = collection.UserId;
 
-    //                row.Id = dc.tblCollections.Any() ? dc.tblCollections.Max(g => g.Id) + 1 : 1;
-    //                row.CourseId = collection.CourseId;
-    //                row.UserId = collection.UserId; 
+                    // Backfill the id
+                    collection.Id = row.Id;
 
-    //                // Backfill the id
-    //                collection.Id = row.Id;
+                    dc.tblCollections.Add(row);
 
-    //                dc.tblCollections.Add(row);
+                    dc.SaveChanges();
 
-    //                dc.SaveChanges();
+                    results = collection.Id;
 
-    //                results = collection.Id;
+                    if (rollback) transaction.Rollback();
 
-    //                if (rollback) transaction.Rollback();
+                    return results;
 
-    //                return results;
+                }
+            }
+            catch (Exception)
+            {
 
-    //            }
-    //        }
-    //        catch (Exception)
-    //        {
+                throw;
+            }
+        }
 
-    //            throw;
-    //        }
-    //    }
+        public static int Update(Collection collection, bool rollback = false)
+        {
 
-    //    public static int Update(Collection collection, bool rollback = false)
-    //    {
+            try
+            {
+                int results = 0;
+                using (ElevateEntities dc = new ElevateEntities())
+                {
 
-    //        try
-    //        {
-    //            int results = 0;
-    //            using (ElevateEntities dc = new ElevateEn())
-    //            {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
 
-    //                IDbContextTransaction transaction = null;
-    //                if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblCollection row = dc.tblCollections.FirstOrDefault(p => p.Id == collection.Id);
 
-    //                // Make a new tblOrder row
-    //                tblCollection row = dc.tblCollections.FirstOrDefault(p => p.Id == collection.Id);
+                    if (row != null)
+                    {
 
-    //                if (row != null)
-    //                {
+                        row.CourseId = collection.CourseId;
+                        row.UserId = collection.UserId;
 
-    //                    row.CourseId = collection.CourseId;
-    //                    row.UserId = collection.UserId;
+                        results = dc.SaveChanges();
 
-    //                    results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found.");
+                    }
 
-    //                    if (rollback) transaction.Rollback();
-    //                }
-    //                else
-    //                {
-    //                    throw new Exception("Row was not found.");
-    //                }
+                    return results;
 
-    //                return results;
+                }
+            }
+            catch (Exception)
+            {
 
-    //            }
-    //        }
-    //        catch (Exception)
-    //        {
+                throw;
+            }
+        }
 
-    //            throw;
-    //        }
-    //    }
+        public static int Delete(int id, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (ElevateEntities dc = new ElevateEntities())
+                {
 
-    //    public static int Delete(int id, bool rollback = false)
-    //    {
-    //        try
-    //        {
-    //            int results = 0;
-    //            using (ElevateEntities dc = new ElevateEntities())
-    //            {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
 
-    //                IDbContextTransaction transaction = null;
-    //                if (rollback) transaction = dc.Database.BeginTransaction();
+                    tblCollection row = dc.tblCollections.FirstOrDefault(p => p.Id == id);
 
-    //                // Make a new tblOrder row
-    //                tblCollection row = dc.tblCollections.FirstOrDefault(p => p.Id == id);
+                    if (row != null)
+                    {
 
-    //                if (row != null)
-    //                {
+                        dc.tblCollections.Remove(row);
 
-    //                    dc.tblCollections.Remove(row);
+                        results = dc.SaveChanges();
 
-    //                    results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found.");
+                    }
 
-    //                    if (rollback) transaction.Rollback();
-    //                }
-    //                else
-    //                {
-    //                    throw new Exception("Row was not found.");
-    //                }
+                    return results;
 
-    //                return results;
+                }
+            }
+            catch (Exception)
+            {
 
-    //            }
-    //        }
-    //        catch (Exception)
-    //        {
+                throw;
+            }
+        }
 
-    //            throw;
-    //        }
-    //    }
+        /*public static Collection LoadById(int id)
+        {
 
-    //    /*public static Collection LoadById(int id)
-    //    {
+            try
+            {
 
-    //        try
-    //        {
+                using (ElevateEntities dc = new ElevateEntities())
+                {
 
-    //            using (ElevateEntities dc = new ElevateEntities())
-    //            {
+                    tblCollection row = dc.tblCollections.FirstOrDefault(p => p.Id == id);
 
-    //                tblCollection row = dc.tblCollections.FirstOrDefault(p => p.Id == id);
+                    if (row != null)
+                    {
+                        Collection collection = CustomerManager.LoadById(row.CustomerId);
+                        string custfn = cust.LastName + ", " + cust.FirstName;
 
-    //                if (row != null)
-    //                {
-    //                    Collection collection = CustomerManager.LoadById(row.CustomerId);
-    //                    string custfn = cust.LastName + ", " + cust.FirstName;
+                        User user = UserManager.LoadById(row.UserId);
 
-    //                    User user = UserManager.LoadById(row.UserId);
+                        string username = user.UserId;
+                        string userfullname = user.FullName;
 
-    //                    string username = user.UserId;
-    //                    string userfullname = user.FullName;
-
-    //                    Order order = new Order
-    //                    {
+                        Order order = new Order
+                        {
 
 
-    //                        Id = row.Id,
-    //                        CustomerId = row.CustomerId,
-    //                        CustomerName = custfn,
-    //                        OrderDate = row.OrderDate,
-    //                        UserId = row.UserId,
-    //                        UserName = username,
-    //                        UserFullName = userfullname,
-    //                        ShipDate = row.ShipDate,
+                            Id = row.Id,
+                            CustomerId = row.CustomerId,
+                            CustomerName = custfn,
+                            OrderDate = row.OrderDate,
+                            UserId = row.UserId,
+                            UserName = username,
+                            UserFullName = userfullname,
+                            ShipDate = row.ShipDate,
 
-    //                    };
-    //                    return order;
+                        };
+                        return order;
 
-    //                }
-    //                else
-    //                {
+                    }
+                    else
+                    {
 
-    //                    throw new Exception("Row was not found.");
-    //                }
-    //            }
-    //        }
-    //        catch (Exception)
-    //        {
+                        throw new Exception("Row was not found.");
+                    }
+                }
+            }
+            catch (Exception)
+            {
 
-    //            throw;
-    //        }
-    //    }*/
+                throw;
+            }
+        }*/
 
-    //    public static List<Order> Load(int? Id = null)
-    //    {
-    //        List<Collection> rows = new List<Collection>();
+        public static List<Collection> Load(int? Id = null)
+        {
+            List<Collection> rows = new List<Collection>();
 
-    //        using (ElevateEntities dc = new ElevateEntities())
-    //        {
+            using (ElevateEntities dc = new ElevateEntities())
+            {
 
-    //            var tblCollections = (from p in dc.tblCollections
-    //                             where UserId == null || p.Id == UserId
-    //                             select p).ToList();
+                var tblCollections = (from p in dc.tblCollections
+                                      where p.UserId == null || p.Id == Id
+                                      select p).ToList();
 
-    //            foreach (tblCollection p in tblCollections)
-    //            {
-    //                rows.Add(new Collection
-    //                {
-    //                    Id = p.Id,
-    //                    CourseId = p.CourseId,
-    //                    UserId = p.UserId,
+                foreach (tblCollection p in tblCollections)
+                {
+                    rows.Add(new Collection
+                    {
+                        Id = p.Id,
+                        CourseId = p.CourseId,
+                        UserId = p.UserId,
 
-    //                });
-    //            }
+                    });
+                }
 
-    //            return rows;
+                return rows;
 
-    //        }
+            }
 
 
-    //    }
+        }
 
-    //    public static List<Collection> LoadByCustomerId(int CustomerId)
-    //    {
+        public static List<Collection> LoadByCustomerId(int CustomerId)
+        {
 
-    //        return Load(CustomerId);
+            return Load(CustomerId);
 
-    //    }
+        }
     }
 }
