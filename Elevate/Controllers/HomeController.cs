@@ -29,6 +29,10 @@ namespace Elevate.Controllers
         {
             return View();
         }
+        public IActionResult Cart()
+        {
+            return View();
+        }
         public IActionResult Library()
         {
             return View();

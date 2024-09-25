@@ -50,7 +50,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Collection">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Cart">
                                 <i class="fa-solid fa-cart-shopping"></i> Cart
                             </a>
                         </li>
@@ -81,10 +81,14 @@
                             <input type="checkbox" class="form-check-input" id="rememberMe">
                             <label class="form-check-label" for="rememberMe">Remember me</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex flex-column align-items-center">
+                    <a href="#" class="text-decoration-none small">
+                        Forgot Username or Password?</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -96,12 +100,6 @@
             @RenderBody()
         </main>
     </div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - Elevate - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
