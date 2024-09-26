@@ -213,11 +213,10 @@ namespace BL
                             {
                                 if (tbluser.Password == GetHash(user.Password))
                                 {
+                                    user.Id = tbluser.Id;
+                                    user.Email = tbluser.Email;
                                     user.FirstName = tbluser.FirstName;
                                     user.LastName = tbluser.LastName;
-                                    user.Email = tbluser.Email;
-                                    user.Id = tbluser.Id;
-
                                     return true;
                                 }
                                 else
@@ -227,7 +226,7 @@ namespace BL
                             }
                             else
                             {
-                                throw new Exception("User Id could not be found.");
+                                throw new Exception("Email could not be found.");
                             }
                         }
                     }
@@ -238,7 +237,7 @@ namespace BL
                 }
                 else
                 {
-                    throw new Exception("User Id was not set.");
+                    throw new Exception("Email was not set.");
                 }
             }
             catch (Exception ex)
@@ -250,7 +249,6 @@ namespace BL
         }
         public static int DeleteAll()
         {
-
             try
             {
                 using (ElevateEntities dc = new ElevateEntities())

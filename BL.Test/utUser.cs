@@ -6,11 +6,6 @@ namespace Elevate.BL.Test
     [TestClass]
     public class utUser
     {
-        [TestMethod]
-        public void Seed()
-        {
-            UserManager.Seed();
-        }
 
         [TestMethod]
         public void InsertTest()
@@ -26,30 +21,29 @@ namespace Elevate.BL.Test
             Assert.AreEqual(1, UserManager.Insert(user, true));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(1, UserManager.Load().Count);
-        }
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            UserManager.Seed();
+            Assert.AreEqual(3, UserManager.Load().Count);
         }
 
         [TestMethod]
         public void LoginSuccessTest()
         {
-            Assert.IsTrue(UserManager.Login(new User { Email = "dpeerenboom@gmail.com", Password = "maple" }));
-            Assert.IsTrue(UserManager.Login(new User { Email = "bfoote", Password = "maple" }));
+            Seed();
+            Assert.IsTrue(UserManager.Login(new User { Email = "user", Password = "test" }));
         }
+        public void Seed()
+        {
+            UserManager.Seed();
+        }
+
         [TestMethod]
         public void LoginFailureBadPasswordTest()
         {
             try
             {
-                Assert.IsTrue(UserManager.Login(new User { Email = "dpeerenboom", Password = "pine" }));
+                Assert.IsFalse(UserManager.Login(new User { Email = "Joe", Password = "pine" }));
             }
             catch (LoginFailureException)
             {
@@ -66,7 +60,7 @@ namespace Elevate.BL.Test
         {
             try
             {
-                Assert.IsTrue(UserManager.Login(new User { Email = "", Password = "maple" }));
+                Assert.IsFalse(UserManager.Login(new User { Email = "", Password = "Smith" }));
             }
             catch (LoginFailureException)
             {
@@ -83,7 +77,8 @@ namespace Elevate.BL.Test
         {
             try
             {
-                Assert.IsTrue(UserManager.Login(new User { Email = "dpeerenboom", Password = "" }));
+                Seed();
+                Assert.IsFalse(UserManager.Login(new User { Email = "Joe", Password = "" }));
             }
             catch (LoginFailureException)
             {
@@ -100,7 +95,8 @@ namespace Elevate.BL.Test
         {
             try
             {
-                Assert.IsTrue(UserManager.Login(new User { Email = "Jim Bob", Password = "maple" }));
+                Seed();
+                Assert.IsFalse(UserManager.Login(new User { Email = "Jim Bob", Password = "testing123" }));
             }
             catch (LoginFailureException)
             {
@@ -112,5 +108,24 @@ namespace Elevate.BL.Test
                 throw;
             }
         }
+
+        [TestMethod]
+        public void LoginFailureNoPassword()
+        {
+            try
+            {
+                Seed();
+                Assert.IsTrue(UserManager.Login(new User { Email = "user", Password = "" }));
+            }
+            catch (LoginFailureException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
     }
 }
