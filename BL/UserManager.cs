@@ -82,7 +82,39 @@ namespace BL
         public static int Update(User user, bool rollback = false)
         {
 
-            return 0;
+            try
+            {
+                int results = 0;
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+
+                    // Get the row we are trying to update
+                    tblUser entity = dc.tblUsers.FirstOrDefault(g => g.Id == user.Id);
+
+                    if (entity != null)
+                    {
+                        entity.FirstName = user.FirstName;
+                        entity.LastName = user.LastName;
+                        entity.Email = user.Email;
+                        entity.Password = GetHash(user.Password);
+                        results = dc.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist");
+                    }
+
+                    if (rollback) transaction.Rollback();
+
+                }
+                return results;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
         }
 
@@ -131,28 +163,37 @@ namespace BL
 
         public static List<User> Load()
         {
-            List<User> rows = new List<User>();
-
-            using (ElevateEntities dc = new ElevateEntities())
+            try
             {
-                var tblUsers = (from p in dc.tblUsers
-                                select p).ToList();
+                List<User> list = new List<User>();
 
-                foreach (tblUser p in tblUsers)
+                using (ElevateEntities dc = new ElevateEntities())
                 {
-                    rows.Add(new User
-                    {
-                        Id = p.Id,
-                        Email = p.Email,
-                        Password = p.Password,
-                        FirstName = p.FirstName,
-                        LastName = p.LastName
-
-                    });
+                    (from u in dc.tblUsers
+                     select new
+                     {
+                         u.Id,
+                         u.FirstName,
+                         u.LastName,
+                         u.Email,
+                         u.Password
+                     })
+                     .ToList()
+                     .ForEach(user => list.Add(new User
+                     {
+                         Id = user.Id,
+                         FirstName = user.FirstName,
+                         LastName = user.LastName,
+                         Email = user.Email,
+                         Password = user.Password
+                     }));
                 }
+                return list;
+            }
+            catch (Exception)
+            {
 
-                return rows;
-
+                throw;
             }
 
         }
