@@ -1,11 +1,5 @@
-﻿using BL.Models;
-using BL;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BL;
+using BL.Models;
 
 namespace Elevate.BL.Test
 {
@@ -13,11 +7,9 @@ namespace Elevate.BL.Test
     public class utUser
     {
         [TestMethod]
-        public void SeedTest()
+        public void Seed()
         {
-            int actual = UserManager.Seed();
-            Debug.Print("Users: " + actual);
-            Assert.AreEqual(2, actual);
+            UserManager.Seed();
         }
 
         [TestMethod]

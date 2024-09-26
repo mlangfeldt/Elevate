@@ -1,11 +1,8 @@
 ﻿using BL.Models;
-using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elevate.PL;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace BL
 {
@@ -24,13 +21,10 @@ namespace BL
     {
         private static string GetHash(string password)
         {
-
-            using (var hash = new System.Security.Cryptography.SHA1Managed())
+            using (var hasher = SHA1.Create())
             {
-
-                var hashbytes = System.Text.Encoding.UTF8.GetBytes(password);
-                return Convert.ToBase64String(hash.ComputeHash(hashbytes));
-
+                var hashbytes = Encoding.UTF8.GetBytes(password);
+                return Convert.ToBase64String(hasher.ComputeHash(hashbytes));
             }
         }
 
@@ -74,8 +68,14 @@ namespace BL
 
         public static void Seed()
         {
-            User user = new User("bfoote", "Brian", "Foote", "maple");
-            Insert(user);
+            using (ElevateEntities dc = new ElevateEntities())
+            {
+                if (!dc.tblUsers.Any())
+                {
+                    User user = new User() { Email = "user", FirstName = "John", LastName = "Snow", Password = "test" };
+                    Insert(user);
+                }
+            }
 
         }
 
@@ -135,16 +135,6 @@ namespace BL
 
             using (ElevateEntities dc = new ElevateEntities())
             {
-                // Lambda expressions
-                //dc.tblCustomers
-                //    .ToList()
-                //    .ForEach(p => rows.Add(new Customer
-                //    {
-                //        Id = p.Id,
-                //        Description = p.Description,
-                //        DegreeTypeId = p.DegreeTypeId
-                //    }));
-
                 var tblUsers = (from p in dc.tblUsers
                                 select p).ToList();
 
@@ -182,8 +172,6 @@ namespace BL
                             {
                                 if (tbluser.Password == GetHash(user.Password))
                                 {
-                                    // User logged in successfully
-                                    // back fill the other fields.
                                     user.FirstName = tbluser.FirstName;
                                     user.LastName = tbluser.LastName;
                                     user.Email = tbluser.Email;
@@ -235,7 +223,6 @@ namespace BL
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
