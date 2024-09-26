@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BL.Models\Elevate.BL.Models.csproj" />
     <ProjectReference Include="..\BL\Elevate.BL.csproj" />
   </ItemGroup>
 

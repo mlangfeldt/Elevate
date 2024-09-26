@@ -72,6 +72,7 @@
     <None Include="PostDeploy\DefaultData\Collections.sql" />
     <None Include="PostDeploy\DefaultData\Users.sql" />
     <None Include="local.publish.xml" />
+    <None Include="Elevate_1.DB.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblCollection.sql" />
