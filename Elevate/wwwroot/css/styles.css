@@ -10847,22 +10847,32 @@ html {
   min-height: 15rem;
 }
 
+
 .custom-navbar {
-    background-color: black; 
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(13, 110, 253, 1) 100%); 
     display: flex;
-    justify-content: space-between;
-    align-items: center;/*aligns nav bar items vertically*/
+    align-items: center;
+}
+
+
+.navbar-collapse {
+    flex-grow: 1; 
+    display: flex; 
+    justify-content: center; 
 }
 
 .navbar-nav {
     display: flex;
-    flex-grow: 1; 
-    justify-content: center; /* center vertically */
+    align-items: center; 
+    margin: 0; 
+}
+
+.nav-item {
+    margin: 0 15px; 
 }
 
 .logo {
-    width: 100px;
-    height: auto;
+    margin-right: 10px; 
 }
 
 .image-pop {
@@ -10873,9 +10883,12 @@ html {
     margin-bottom: 15px;
 }
 
-    .image-pop:hover {
+.image-pop:hover {
         transform: scale(1.1); 
-    }
+}
+
+
+
 
 
 
