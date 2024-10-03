@@ -176,40 +176,39 @@ namespace BL
             }
         }*/
 
-        public static List<Collection> Load(int? Id = null)
+        public static List<Collection> Load()
         {
-            List<Collection> rows = new List<Collection>();
+            try
+            {
+                List<Collection> list = new List<Collection>();
 
-            using (ElevateEntities dc = new ElevateEntities())
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    (from c in dc.tblCollections
+                     select new
+                     {
+                         c.Id,
+                         c.CourseId,
+                         c.UserId
+                     })
+                     .ToList()
+                     .ForEach(collection => list.Add(new Collection
+                     {
+                         Id = collection.Id,
+                         CourseId = collection.CourseId,
+                         UserId = collection.UserId
+                     }));
+                }
+                return list;
+            }
+            catch (Exception)
             {
 
-                var tblCollections = (from p in dc.tblCollections
-                                      where p.UserId == null || p.Id == Id
-                                      select p).ToList();
-
-                foreach (tblCollection p in tblCollections)
-                {
-                    rows.Add(new Collection
-                    {
-                        Id = p.Id,
-                        CourseId = p.CourseId,
-                        UserId = p.UserId,
-
-                    });
-                }
-
-                return rows;
-
+                throw;
             }
 
-
         }
 
-        public static List<Collection> LoadByCustomerId(int CustomerId)
-        {
 
-            return Load(CustomerId);
-
-        }
     }
 }

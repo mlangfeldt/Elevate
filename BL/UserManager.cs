@@ -72,8 +72,34 @@ namespace BL
             {
                 if (!dc.tblUsers.Any())
                 {
-                    User user = new User() { Email = "user", FirstName = "John", LastName = "Snow", Password = "test" };
+                    User user = new User()
+                    {
+                        Email = "user",
+                        FirstName = "joe",
+                        LastName = "snow",
+                        Password = "test"
+                    };
                     Insert(user);
+
+
+                    user = new User()
+                    {
+                        Email = "user1",
+                        FirstName = "steve",
+                        LastName = "snow",
+                        Password = "test123"
+                    };
+                    Insert(user);
+                    user = new User()
+                    {
+                        Email = "user2",
+                        FirstName = "jamal",
+                        LastName = "snow",
+                        Password = "test12345"
+                    };
+                    Insert(user);
+
+
                 }
             }
 
