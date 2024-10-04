@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Elevate/Views/Home/ForgotPassword.cshtml
+/Elevate/Models/ForgotPasswordModel.cs
