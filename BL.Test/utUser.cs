@@ -42,8 +42,8 @@ namespace Elevate.BL.Test
             bool result = UserManager.Login(user);
 
             Assert.IsTrue(result, "Login should return true for valid credentials.");
-            Assert.AreEqual("joe", user.FirstName, "FirstName should be 'John' after successful login.");
-            Assert.AreEqual("snow", user.LastName, "LastName should be 'Snow' after successful login.");
+            Assert.AreEqual("joe", user.FirstName, "FirstName should be 'joe' after successful login.");
+            Assert.AreEqual("snow", user.LastName, "LastName should be 'snow' after successful login.");
         }
 
         [TestMethod]
