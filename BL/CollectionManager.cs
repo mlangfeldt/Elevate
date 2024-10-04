@@ -2,7 +2,7 @@
 using Elevate.PL;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace BL
+namespace Elevate.BL
 {
     public class CollectionManager
     {
@@ -176,39 +176,40 @@ namespace BL
             }
         }*/
 
-        public static List<Collection> Load()
+        public static List<Collection> Load(int? Id = null)
         {
-            try
-            {
-                List<Collection> list = new List<Collection>();
+            List<Collection> rows = new List<Collection>();
 
-                using (ElevateEntities dc = new ElevateEntities())
+            using (ElevateEntities dc = new ElevateEntities())
+            {
+
+                var tblCollections = (from p in dc.tblCollections
+                                      where p.UserId == null || p.Id == Id
+                                      select p).ToList();
+
+                foreach (tblCollection p in tblCollections)
                 {
-                    (from c in dc.tblCollections
-                     select new
-                     {
-                         c.Id,
-                         c.CourseId,
-                         c.UserId
-                     })
-                     .ToList()
-                     .ForEach(collection => list.Add(new Collection
-                     {
-                         Id = collection.Id,
-                         CourseId = collection.CourseId,
-                         UserId = collection.UserId
-                     }));
-                }
-                return list;
-            }
-            catch (Exception)
-            {
+                    rows.Add(new Collection
+                    {
+                        Id = p.Id,
+                        CourseId = p.CourseId,
+                        UserId = p.UserId,
 
-                throw;
+                    });
+                }
+
+                return rows;
+
             }
+
 
         }
 
+        public static List<Collection> LoadByCustomerId(int CustomerId)
+        {
 
+            return Load(CustomerId);
+
+        }
     }
 }

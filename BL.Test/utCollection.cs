@@ -1,6 +1,4 @@
-﻿using BL;
-
-namespace Elevate.BL.Test
+﻿namespace Elevate.BL.Test
 {
     [TestClass]
     public class utCollection

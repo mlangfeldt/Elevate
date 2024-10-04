@@ -21,4 +21,9 @@
     <ProjectReference Include="..\PL\Elevate.PL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\User\" />
+  </ItemGroup>
+
 </Project>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace BL
+namespace Elevate.BL
 {
 
     public class LoginFailureException : Exception
@@ -28,7 +28,7 @@ namespace BL
             }
         }
 
-        public static int Insert(User user, Boolean rollback = false)
+        public static int Insert(User user, bool rollback = false)
         {
             try
             {
@@ -72,34 +72,8 @@ namespace BL
             {
                 if (!dc.tblUsers.Any())
                 {
-                    User user = new User()
-                    {
-                        Email = "user",
-                        FirstName = "joe",
-                        LastName = "snow",
-                        Password = "test"
-                    };
+                    User user = new User() { Email = "user", FirstName = "John", LastName = "Snow", Password = "test" };
                     Insert(user);
-
-
-                    user = new User()
-                    {
-                        Email = "user1",
-                        FirstName = "steve",
-                        LastName = "snow",
-                        Password = "test123"
-                    };
-                    Insert(user);
-                    user = new User()
-                    {
-                        Email = "user2",
-                        FirstName = "jamal",
-                        LastName = "snow",
-                        Password = "test12345"
-                    };
-                    Insert(user);
-
-
                 }
             }
 
