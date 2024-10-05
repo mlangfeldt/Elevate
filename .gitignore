@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /Elevate/Views/Home/ForgotPassword.cshtml
 /Elevate/Models/ForgotPasswordModel.cs
+/Elevate/Models/ForgotPasswordModel.cs
+/Elevate/Views/Home/ForgotPassword.cshtml
+/Elevate/Controllers/CourseController.cs
