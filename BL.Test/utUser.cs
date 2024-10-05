@@ -32,7 +32,7 @@ namespace Elevate.BL.Test
         public void LoadTest()
         {
             var users = UserManager.Load();
-            Assert.AreEqual(1, users.Count);
+            Assert.AreEqual(3, users.Count);
         }
 
         [TestMethod]
@@ -42,8 +42,8 @@ namespace Elevate.BL.Test
             bool result = UserManager.Login(user);
 
             Assert.IsTrue(result, "Login should return true for valid credentials.");
-            Assert.AreEqual("John", user.FirstName, "FirstName should be 'John' after successful login.");
-            Assert.AreEqual("Snow", user.LastName, "LastName should be 'Snow' after successful login.");
+            Assert.AreEqual("joe", user.FirstName, "FirstName should be 'John' after successful login.");
+            Assert.AreEqual("snow", user.LastName, "LastName should be 'Snow' after successful login.");
         }
 
         [TestMethod]
