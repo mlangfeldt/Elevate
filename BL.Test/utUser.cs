@@ -1,10 +1,17 @@
-﻿using BL.Models;
+﻿using BL;
+using BL.Models;
 
 namespace Elevate.BL.Test
 {
     [TestClass]
     public class utUser
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            UserManager.DeleteAll();
+            UserManager.Seed();
+        }
 
         [TestMethod]
         public void InsertTest()
@@ -17,114 +24,58 @@ namespace Elevate.BL.Test
                 Password = "Hello"
             };
 
-            Assert.AreEqual(1, UserManager.Insert(user, true));
+            int result = UserManager.Insert(user);
+            Assert.AreEqual(1, result, "Insert method should return 1 when a user is successfully inserted.");
         }
 
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, UserManager.Load().Count);
+            var users = UserManager.Load();
+            Assert.AreEqual(3, users.Count);
         }
 
         [TestMethod]
         public void LoginSuccessTest()
         {
-            Seed();
-            Assert.IsTrue(UserManager.Login(new User { Email = "user", Password = "test" }));
-        }
-        public void Seed()
-        {
-            UserManager.Seed();
+            var user = new User { Email = "user", Password = "test" };
+            bool result = UserManager.Login(user);
+
+            Assert.IsTrue(result, "Login should return true for valid credentials.");
+            Assert.AreEqual("joe", user.FirstName, "FirstName should be 'John' after successful login.");
+            Assert.AreEqual("snow", user.LastName, "LastName should be 'Snow' after successful login.");
         }
 
         [TestMethod]
+        [ExpectedException(typeof(LoginFailureException))]
         public void LoginFailureBadPasswordTest()
         {
-            try
-            {
-                Assert.IsFalse(UserManager.Login(new User { Email = "Joe", Password = "pine" }));
-            }
-            catch (LoginFailureException)
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        [TestMethod]
-        public void LoginFailureMissingIdTest()
-        {
-            try
-            {
-                Assert.IsFalse(UserManager.Login(new User { Email = "", Password = "Smith" }));
-            }
-            catch (LoginFailureException)
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        [TestMethod]
-        public void LoginFailureMissingPasswordTest()
-        {
-            try
-            {
-                Seed();
-                Assert.IsFalse(UserManager.Login(new User { Email = "Joe", Password = "" }));
-            }
-            catch (LoginFailureException)
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        [TestMethod]
-        public void LoginFailureUnknownUserTest()
-        {
-            try
-            {
-                Seed();
-                Assert.IsFalse(UserManager.Login(new User { Email = "Jim Bob", Password = "testing123" }));
-            }
-            catch (LoginFailureException)
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            var user = new User { Email = "user", Password = "wrongpassword" };
+            UserManager.Login(user);
         }
 
         [TestMethod]
-        public void LoginFailureNoPassword()
+        [ExpectedException(typeof(Exception), "Email was not set.")]
+        public void NoEmailTest()
         {
-            try
-            {
-                Seed();
-                Assert.IsTrue(UserManager.Login(new User { Email = "user", Password = "" }));
-            }
-            catch (LoginFailureException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
+            var user = new User { Email = "", Password = "test" };
+            UserManager.Login(user);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Password was not set.")]
+        public void MissingPasswordTest()
+        {
+            var user = new User { Email = "user", Password = "" };
+            UserManager.Login(user);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Email could not be found.")]
+        public void NoEmailOrPasswordTest()
+        {
+            var user = new User { Email = "Jim Bob", Password = "testing123" };
+            UserManager.Login(user);
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace Elevate.BL.Test
+﻿using BL;
+using BL.Models;
+
+namespace Elevate.BL.Test
 {
     [TestClass]
     public class utCollection
