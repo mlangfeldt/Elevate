@@ -1,4 +1,5 @@
-﻿@* @model Elevate.BL.Models.User *@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,11 +48,39 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <i class="fa-solid fa-user"></i> Login
-                            </a>
-                        </li>
+                        @{
+                          
+                            var fullname = @HttpContextAccessor.HttpContext.Session.GetString("fullname");
+                            if (fullname != null)
+                            {
+                                <li>GRRRRRRRRRRRRRRRRRRRRRRRR</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light">@fullname</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-controller="User" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light">@fullname</a>
+                                </li>
+
+                                @*  <li class="nav-item">
+                                    <a class="nav-link text-light" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    <i class="fa-solid fa-user"></i> Login
+                                    </a>
+                                    </li> *@
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-controller="User" asp-action="Login"><i class="fa-solid fa-user"></i> Login</a>
+                                </li>
+                            }
+
+                        }
+
+                        
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Cart">
                                 <i class="fa-solid fa-cart-shopping"></i> Cart
@@ -63,7 +92,8 @@
         </nav>
 
     </header>
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+
+    @* <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -136,7 +166,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
 
     <div class="container">
         <main role="main" class="pb-3">

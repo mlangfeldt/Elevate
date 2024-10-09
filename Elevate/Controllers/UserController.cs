@@ -34,6 +34,15 @@ namespace Elevate.Controllers
             return View();
         }
 
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        public IActionResult Reset()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult Login(User user)
         {
@@ -90,10 +99,11 @@ namespace Elevate.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(User user)
         {
             try
             {
+                int results = UserManager.Insert(user);
                 return RedirectToAction(nameof(Index));
             }
             catch

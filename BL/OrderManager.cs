@@ -19,13 +19,13 @@ namespace Elevate.BL
         {
             double total = 0;
 
-            List<OrderItem> orderItem = OrderItemManager.LoadByOrderId(orderId);
+            //List<OrderItem> orderItem = OrderItemManager.LoadByOrderId(orderId);
 
-            foreach (OrderItem item in orderItem)
-            {
-                total += item.Cost;
-            }
-            total *= 1.055;
+            //foreach (OrderItem item in orderItem)
+            //{
+            //    total += item.Cost;
+            //}
+            //total *= 1.055;
 
             return total;
         }

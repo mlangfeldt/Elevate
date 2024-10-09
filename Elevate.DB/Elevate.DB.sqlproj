@@ -75,6 +75,8 @@
     <None Include="Elevate_1.DB.publish.xml" />
     <None Include="Elevate.DB.publish.xml" />
     <None Include="localdb.publish.publish.xml" />
+    <None Include="local.Elevate.DB.publish.publish.xml" />
+    <None Include="local.Elevate.DB.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblCollection.sql" />
