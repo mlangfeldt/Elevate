@@ -10888,13 +10888,6 @@ html {
         transform: scale(1.1); 
 }
 
-.navbar-brand {
-    font-family: 'Rock Salt', cursive; 
-    font-size: 25px; 
-    font-weight: bold; 
-    color: white; 
-}
-
 .nav-link:not(.nav-tabs .nav-link) {
     font-family: 'Arapey', serif;
     font-size: 20px;
