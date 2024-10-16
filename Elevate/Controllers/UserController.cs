@@ -53,9 +53,12 @@ namespace Elevate.Controllers
                     SetUser(user);
                     if (TempData["returnurl"] != null)
                         return Redirect(TempData["returnurl"].ToString());
-                    else ViewBag.Message = "You are now logged in.";
+                    else
+                    {
+                        ViewBag.Message = "You are now logged in.";
+                    }
                 }
-                return View(user);
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
