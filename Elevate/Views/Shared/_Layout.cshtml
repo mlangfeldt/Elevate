@@ -49,11 +49,12 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
                         @{
-                          
+
                             var fullname = @HttpContextAccessor.HttpContext.Session.GetString("fullname");
-                            if (fullname != null)
+                            if (fullname != null) fullname = fullname.Replace("\"", "");
+
+                            if (!string.IsNullOrEmpty(fullname))
                             {
-                                <li>GRRRRRRRRRRRRRRRRRRRRRRRR</li>
                                 <li class="nav-item">
                                     <a class="nav-link text-light">@fullname</a>
                                 </li>
