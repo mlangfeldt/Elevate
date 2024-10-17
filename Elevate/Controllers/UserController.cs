@@ -1,13 +1,7 @@
-﻿using BL;
-using BL.Models;
+﻿using BL.Models;
 using Elevate.BL;
 using Elevate.UI.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Elevate.Controllers
 {
@@ -31,7 +25,7 @@ namespace Elevate.Controllers
         public IActionResult Logout()
         {
             SetUser(null);
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult ForgotPassword()
