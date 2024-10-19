@@ -34,7 +34,8 @@
                 <div class="tab-content" id="loginSignupTabContent">
                     <!-- Login Form -->
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                        <form asp-controller="User" asp-action="Login">
+                        <form asp-controller="User" asp-action="Login" method="post">
+                            @Html.AntiForgeryToken()
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="loginEmail" name="Email" required>
@@ -64,7 +65,8 @@
 
                     <!-- Signup Form -->
                     <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                        <form method="post" asp-controller="User" asp-action="Create">
+                        <form method="post" asp-controller="User" asp-action="Create" method="post">
+                             @Html.AntiForgeryToken()
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
                                 <input type="text" class="form-control" id="firstName" name="FirstName" required>
