@@ -1,53 +1,167 @@
-﻿@model IEnumerable<BL.Models.User>
-
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
-
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Home Page";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Password)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <header>
+            <div class="container text-center my-5">
+                <h1>Welcome to Elevate</h1>
+                <p>Explore our featured courses and learn more about financial planning and investment.</p>
+                @if (!string.IsNullOrEmpty(TempData["Message"] as string))
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["Message"]
+                    </div>
+                }
+            </div>
+        </header>
+
+
+        <!-- Blog preview section-->
+        <section class="py-5">
+            <div class="row gx-5">
+                <div class="col-lg-3 mb-5">
+                    <div class="card h-100 shadow border-0">
+                        <a href="@Url.Action("DebtManagement", "Home")">
+                            <img class="card-img-top image-pop" src="~/images/debt.jpg" alt="Debt Management" style="width: 275px; height: auto;" />
+                        </a>
+                        <div class="card-body p-4">
+                            <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("DebtManagement", "Home")">
+                                <h5 class="card-title mb-3">Debt Management</h5>
+                            </a>
+                            <p class="card-text mb-0">Learn practical strategies for managing and reducing debt effectively.</p>
+                        </div>
+                        <!--Card Footer-->
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                            <div class="d-flex align-items-end justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                    <div class="small">
+                                        <div class="fw-bold">Kelly Rowan</div>
+                                        <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Second Card -->
+                <div class="col-lg-3 mb-5">
+                    <div class="card h-100 shadow border-0">
+                        <a href="@Url.Action("Budgeting", "Home")">
+                            <img class="card-img-top image-pop" src="~/images/budget.jpg" alt="Budgeting" style="width: 275px; height: auto;" />
+                        </a>
+                        <div class="card-body p-4">
+                            <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Budgeting", "Home")">
+                                <h5 class="card-title mb-3">Budgeting</h5>
+                            </a>
+                            <p class="card-text mb-0">Master the art of budgeting to take control of your finances and achieve your financial goals.</p>
+                        </div>
+                        <!--Card Footer-->
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                            <div class="d-flex align-items-end justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                    <div class="small">
+                                        <div class="fw-bold">Kelly Rowan</div>
+                                        <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Third Card -->
+                <div class="col-lg-3 mb-5">
+                    <div class="card h-100 shadow border-0">
+                        <a href="@Url.Action("Investment", "Home")">
+                            <img class="card-img-top image-pop" src="~/images/invest.jpg" alt="Investment" style="width: 275px; height: auto;" />
+                        </a>
+                        <div class="card-body p-4">
+                            <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Investment", "Home")">
+                                <h5 class="card-title mb-3">Investment</h5>
+                            </a>
+                            <p class="card-text mb-0">Discover essential strategies for building wealth and managing your financial portfolio effectively.</p>
+                        </div>
+                        <!--Card Footer-->
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                            <div class="d-flex align-items-end justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                    <div class="small">
+                                        <div class="fw-bold">Kelly Rowan</div>
+                                        <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fourth Card -->
+                <div class="col-lg-3 mb-5">
+                    <div class="card h-100 shadow border-0">
+                        <a href="@Url.Action("Retirement", "Home")">
+                            <img class="card-img-top image-pop" src="~/images/retire.jpg" alt="Retirement" style="width: 275px; height: auto;" />
+                        </a>
+                        <div class="card-body p-4">
+                            <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Retirement", "Home")">
+                                <h5 class="card-title mb-3">Retirement</h5>
+                            </a>
+                            <p class="card-text mb-0">Learn how to create a sustainable retirement plan that ensures financial security and peace of mind during your golden years.</p>
+                        </div>
+                        <!--Card Footer-->
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                            <div class="d-flex align-items-end justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                    <div class="small">
+                                        <div class="fw-bold">Kelly Rowan</div>
+                                        <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Call to action-->
+                <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
+                    <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+                        <div class="mb-4 mb-xl-0">
+                            <div class="fs-3 fw-bold text-white">Stay updated on new courses!</div>
+                            <div class="text-white-50">Sign up for our newsletter to receive the latest course updates and offerings.</div>
+                        </div>
+                        <div class="ms-xl-4">
+                            <div class="input-group mb-2">
+                                <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
+                                <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
+                            </div>
+                            <div class="small text-white-50">We care about privacy, and will never share your data.</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+    <!-- Footer-->
+    <footer class="bg-dark py-4 mt-auto">
+        <div class="container px-5">
+            <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Elevate 2024</div></div>
+                <div class="col-auto">
+                    <a class="link-light small" href="#!">Privacy</a>
+                    <span class="text-white mx-1">&middot;</span>
+                    <a class="link-light small" href="#!">Terms</a>
+                    <span class="text-white mx-1">&middot;</span>
+                    <a class="link-light small" href="#!">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
