@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BL.Models
+﻿namespace BL.Models
 {
     public class OrderItem
     {
@@ -14,6 +7,5 @@ namespace BL.Models
         public int CourseId { get; set; }
         public int Quantity { get; set; }
         public double Cost { get; set; }
-        public string CourseName { get; set; }
     }
 }

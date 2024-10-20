@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,7 +29,7 @@ public partial class ElevateEntities : DbContext
     {
         modelBuilder.Entity<tblCollection>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07F8C313BA");
+            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07315B56DE");
 
             entity.ToTable("tblCollection");
 
@@ -39,7 +38,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblCourse>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC078E00801A");
+            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC073A152AA9");
 
             entity.ToTable("tblCourse");
 
@@ -54,7 +53,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07E2710837");
+            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07E57ADEE9");
 
             entity.ToTable("tblUser");
 

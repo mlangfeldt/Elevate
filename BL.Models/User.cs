@@ -14,7 +14,9 @@ namespace BL.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "passwords do not match")]
         public string ConfirmPassword { get; set; }
+        [Required]
         public string? FirstName { get; set; }
+        [Required]
         public string? LastName { get; set; }
 
     }
