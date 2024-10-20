@@ -19,6 +19,12 @@ public partial class ElevateEntities : DbContext
 
     public virtual DbSet<tblCourse> tblCourses { get; set; }
 
+    public virtual DbSet<tblCustomer> tblCustomers { get; set; }
+
+    public virtual DbSet<tblOrder> tblOrders { get; set; }
+
+    public virtual DbSet<tblOrderItem> tblOrderItems { get; set; }
+
     public virtual DbSet<tblUser> tblUsers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,7 +35,7 @@ public partial class ElevateEntities : DbContext
     {
         modelBuilder.Entity<tblCollection>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07315B56DE");
+            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07D8A319DB");
 
             entity.ToTable("tblCollection");
 
@@ -38,7 +44,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblCourse>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC073A152AA9");
+            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC078CAAB492");
 
             entity.ToTable("tblCourse");
 
@@ -51,9 +57,46 @@ public partial class ElevateEntities : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<tblCustomer>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC079CC07D56");
+
+            entity.ToTable("tblCustomer");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Email)
+                .HasMaxLength(35)
+                .IsUnicode(false);
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<tblOrder>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC077DCE2E1F");
+
+            entity.ToTable("tblOrder");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.OrderDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<tblOrderItem>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07E70C4FE2");
+
+            entity.ToTable("tblOrderItem");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+        });
+
         modelBuilder.Entity<tblUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07E57ADEE9");
+            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07A6DD9573");
 
             entity.ToTable("tblUser");
 
