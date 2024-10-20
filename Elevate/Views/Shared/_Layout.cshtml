@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http;
+﻿@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
@@ -51,8 +51,7 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
                         @{
-
-                            var fullname = @HttpContextAccessor.HttpContext.Session.GetString("fullname");
+                            var fullname = HttpContextAccessor.HttpContext.Session.GetString("fullname");
                             if (fullname != null) fullname = fullname.Replace("\"", "");
 
                             if (!string.IsNullOrEmpty(fullname))
@@ -66,21 +65,13 @@
                             }
                             else
                             {
-                           
-                                @*  <li class="nav-item">
-                                    <a class="nav-link text-light" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                    <i class="fa-solid fa-user"></i> Login
-                                    </a>
-                                    </li> *@
-
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" asp-controller="User" asp-action="Login"><i class="fa-solid fa-user"></i> Login</a>
+                                    <a class="nav-link text-light" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                        <i class="fa-solid fa-user"></i> Login
+                                    </a>
                                 </li>
                             }
-
                         }
-
-                        
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Cart">
                                 <i class="fa-solid fa-cart-shopping"></i> Cart
@@ -90,10 +81,19 @@
                 </div>
             </div>
         </nav>
-
     </header>
 
-    @* <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="container">
+        @RenderBody()
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <p class="text-center">© 2024 Elevate</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -113,10 +113,10 @@
                     <div class="tab-content" id="loginSignupTabContent">
                         <!-- Login Form -->
                         <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                            <form asp-controller="User" asp-action="Login">
+                            <form asp-controller="User" asp-action="Login" method="post">
                                 <div class="mb-3">
                                     <label for="Email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="username" name="username" required>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="Password" class="form-label">Password</label>
@@ -136,7 +136,7 @@
                         </div>
                         <!-- Signup Form -->
                         <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                            <form method="post" action="/Account/Signup">
+                            <form asp-controller="User" asp-action="Create" method="post">
                                 <div class="mb-3">
                                     <label for="firstName" class="form-label">First Name</label>
                                     <input type="text" class="form-control" id="firstName" name="firstName" required>
@@ -166,21 +166,11 @@
                 </div>
             </div>
         </div>
-    </div> *@
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
     </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Elevate - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/scripts.js" asp-append-version="true"></script>
+    <!--console.log("scripts loaded");--!>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

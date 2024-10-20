@@ -101,7 +101,8 @@ namespace Elevate.Controllers
             try
             {
                 int results = UserManager.Insert(user);
-                return RedirectToAction(nameof(Index));
+                TempData["Message"] = "Signup successful! You can now log in.";
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
@@ -153,3 +154,4 @@ namespace Elevate.Controllers
     }
 
 }
+
