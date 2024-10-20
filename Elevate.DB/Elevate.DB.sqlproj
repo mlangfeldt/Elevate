@@ -71,11 +71,17 @@
     <None Include="PostDeploy\DefaultData\Courses.sql" />
     <None Include="PostDeploy\DefaultData\Collections.sql" />
     <None Include="PostDeploy\DefaultData\Users.sql" />
-    <None Include="local.publish.xml" />
+    <None Include="PostDeploy\DefaultData\Customers.sql" />
+    <None Include="PostDeploy\DefaultData\Orders.sql" />
+    <None Include="PostDeploy\DefaultData\OrderItems.sql" />
+    <None Include="Elevate.DB.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblCollection.sql" />
     <Build Include="Tables\tblCourse.sql" />
     <Build Include="Tables\tblUser.sql" />
+    <Build Include="Tables\tblCustomer.sql" />
+    <Build Include="Tables\tblOrder.sql" />
+    <Build Include="Tables\tblOrderItem.sql" />
   </ItemGroup>
 </Project>

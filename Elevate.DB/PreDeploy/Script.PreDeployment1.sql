@@ -13,5 +13,15 @@
 drop table if exists tblCourse
 drop table if exists tblCollection
 drop table if exists tblUser
+drop table if exists tblOrder
+drop table if exists tblOrderItem
+drop table if exists tblCustomer
+
+
+
+
+
+
+
 
 
