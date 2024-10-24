@@ -27,7 +27,7 @@ namespace Elevate.BL.Test
         [TestMethod()]
         public void LoadTest()
         {
-            Assert.AreEqual(1, OrderItemManager.Load().Count);
+            Assert.AreEqual(3, OrderItemManager.Load().Count);
         }
 
         [TestMethod()]
