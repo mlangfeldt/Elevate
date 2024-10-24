@@ -1,4 +1,4 @@
-﻿namespace BL.Models
+﻿namespace Elevate.BL.Models
 {
     public class OrderItem
     {

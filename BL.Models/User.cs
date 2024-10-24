@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BL.Models
+namespace Elevate.BL.Models
 {
     public class User
     {
