@@ -6,6 +6,7 @@ namespace BL.Models
     {
         public List<Course> Items { get; set; } = new List<Course>();
         public int NumberOfItems { get { return Items.Count; } }
+        public int TotalCount { get { return Items.Count; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double SubTotal

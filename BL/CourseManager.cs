@@ -170,60 +170,30 @@ namespace Elevate.BL
             }
         }
 
-        /*
-         * This is for 
-         * 
-         * public static List<Course> Load(int? genreId = null)
+        public static List<Course> Load(int? genreId = null)
         {
             List<Course> rows = new List<Course>();
 
             using (ElevateEntities dc = new ElevateEntities())
             {
 
-                var row = (from p in dc.tblMovies
-                           join mg in dc.tblMovieGenres on p.Id equals mg.Id
-                           join mr in dc.tblRatings on p.RatingId equals mr.Id
-                           join md in dc.tblDirectors on p.DirectorId equals md.Id
-                           join mf in dc.tblFormats on p.FormatId equals mf.Id
-                           where genreId == null || mg.GenreId == genreId
-                           orderby p.Title
+                var row = (from p in dc.tblCourses
                            select new
                            {
                                p.Id,
-                               p.Title,
-                               p.Description,
-                               p.Cost,
-                               p.RatingId,
-                               p.FormatId,
-                               p.DirectorId,
-                               p.InStkQty,
-                               p.ImagePath,
-                               RatingDescription = mr.Description,
-                               FormatDescription = mf.Description,
-                               DirectorFullName = md.FirstName + " " + md.LastName
-
+                               p.Name,
+                               p.Description
                            }).ToList();
 
                 if (row != null)
                 {
                     foreach (var p in row)
                     {
-                        rows.Add(new Movie
+                        rows.Add(new Course
                         {
-
                             Id = p.Id,
-                            Title = p.Title,
-                            Description = p.Description,
-                            Cost = p.Cost,
-                            RatingId = p.RatingId,
-                            FormatId = p.FormatId,
-                            DirectorId = p.DirectorId,
-                            InStkQty = p.InStkQty,
-                            ImagePath = p.ImagePath,
-                            RatingDescription = p.RatingDescription,
-                            FormatDescription = p.FormatDescription,
-                            DirectorFullName = p.DirectorFullName
-
+                            Name = p.Name,
+                            Description = p.Description
                         });
                     }
                     return rows;
@@ -232,17 +202,14 @@ namespace Elevate.BL
                 {
                     throw new Exception("No movies found.");
                 }
-
             }
-
-
         }
 
         public static List<Course> LoadByGenreId(int genreId)
         {
 
             return Load(genreId);
-        }*/
+        }
     }
 
 }
