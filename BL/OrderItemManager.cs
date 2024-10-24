@@ -11,223 +11,215 @@ namespace Elevate.BL
 {
     public class OrderItemManager
     {
-        //public static int Insert(OrderItem orderItem, bool rollback = false)
-        //{
-        //    try
-        //    {
-        //        int results = 0;
-        //        using (ElevateEntities dc = new ElevateEntities())
-        //        {
-        //            IDbContextTransaction dbContextTransaction = null;
-        //            if (rollback) dbContextTransaction = dc.Database.BeginTransaction();
+        public static int Insert(OrderItem orderItem, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    IDbContextTransaction dbContextTransaction = null;
+                    if (rollback) dbContextTransaction = dc.Database.BeginTransaction();
 
-        //            tblOrderItem row = new tblOrderItem();
+                    tblOrderItem row = new tblOrderItem();
 
-        //            row.Id = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(s => s.Id) + 1 : 1;
+                    row.Id = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(s => s.Id) + 1 : 1;
 
-        //            row.OrderId = orderItem.OrderId;
-        //            row.MovieId = orderItem.MovieId;
-        //            row.Quantity = orderItem.Quantity;
-        //            row.Cost = orderItem.Cost;
+                    row.OrderId = orderItem.OrderId;
+                    row.CourseId = orderItem.CourseId;
+                    row.Quantity = orderItem.Quantity;
+                    row.Cost = orderItem.Cost;
 
-        //            // Backfill the ID
-        //            orderItem.Id = row.Id;
+                    // Backfill the ID
+                    orderItem.Id = row.Id;
 
-        //            dc.tblOrderItems.Add(row);
-        //            results = dc.SaveChanges();
+                    dc.tblOrderItems.Add(row);
+                    results = dc.SaveChanges();
 
-        //            if (rollback) dbContextTransaction.Rollback();
-        //        }
+                    if (rollback) dbContextTransaction.Rollback();
+                }
 
-        //        return results;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        //public static List<OrderItem> Load()
-        //{
-        //    try
-        //    {
-        //        List<OrderItem> rows = new List<OrderItem>();
+        public static List<OrderItem> Load()
+        {
+            try
+            {
+                List<OrderItem> rows = new List<OrderItem>();
 
-        //        using (ElevateEntities dc = new ElevateEntities())
-        //        {
-        //            (from s in dc.tblOrderItems
-        //             join m in dc.tblMovies on s.MovieId equals m.Id
-        //             select new
-        //             {
-        //                 s.Id,
-        //                 s.OrderId,
-        //                 s.MovieId,
-        //                 s.Quantity,
-        //                 s.Cost,
-        //                 m.Title,
-        //                 m.ImagePath
-        //             })
-        //             .ToList()
-        //             .ForEach(orderItem => rows.Add(new OrderItem
-        //             {
-        //                 Id = orderItem.Id,
-        //                 OrderId = orderItem.OrderId,
-        //                 MovieId = orderItem.MovieId,
-        //                 Quantity = orderItem.Quantity,
-        //                 Cost = orderItem.Cost,
-        //                 Title = orderItem.Title,
-        //                 ImagePath = orderItem.ImagePath
-        //             }));
-        //        }
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    (from s in dc.tblOrderItems
+                     join m in dc.tblCourses on s.CourseId equals m.Id
+                     select new
+                     {
+                         s.Id,
+                         s.OrderId,
+                         s.CourseId,
+                         s.Quantity,
+                         s.Cost
+                     })
+                     .ToList()
+                     .ForEach(orderItem => rows.Add(new OrderItem
+                     {
+                         Id = orderItem.Id,
+                         OrderId = orderItem.OrderId,
+                         CourseId = orderItem.CourseId,
+                         Quantity = orderItem.Quantity,
+                         Cost = orderItem.Cost
+                     }));
+                }
 
-        //        return rows;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+                return rows;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        //public static List<OrderItem> LoadByOrderId(int orderId)
-        //{
-        //    try
-        //    {
-        //        List<OrderItem> rows = new List<OrderItem>();
+        public static List<OrderItem> LoadByOrderId(int orderId)
+        {
+            try
+            {
+                List<OrderItem> rows = new List<OrderItem>();
 
-        //        using (ElevateEntities dc = new ElevateEntities())
-        //        {
-        //            (from s in dc.tblOrderItems
-        //             join m in dc.tblMovies on s.MovieId equals m.Id
-        //             where s.OrderId == orderId
-        //             select new
-        //             {
-        //                 s.Id,
-        //                 s.OrderId,
-        //                 s.MovieId,
-        //                 s.Quantity,
-        //                 s.Cost,
-        //                 m.Title,
-        //                 m.ImagePath
-        //             })
-        //             .ToList()
-        //             .ForEach(orderItem => rows.Add(new OrderItem
-        //             {
-        //                 Id = orderItem.Id,
-        //                 OrderId = orderItem.OrderId,
-        //                 MovieId = orderItem.MovieId,
-        //                 Quantity = orderItem.Quantity,
-        //                 Cost = orderItem.Cost,
-        //                 Title = orderItem.Title,
-        //                 ImagePath = orderItem.ImagePath
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    (from s in dc.tblOrderItems
+                     join m in dc.tblCourses on s.CourseId equals m.Id
+                     where s.OrderId == orderId
+                     select new
+                     {
+                         s.Id,
+                         s.OrderId,
+                         s.CourseId,
+                         s.Quantity,
+                         s.Cost
+                     })
+                     .ToList()
+                     .ForEach(orderItem => rows.Add(new OrderItem
+                     {
+                         Id = orderItem.Id,
+                         OrderId = orderItem.OrderId,
+                         CourseId = orderItem.CourseId,
+                         Quantity = orderItem.Quantity,
+                         Cost = orderItem.Cost
 
-        //             }));
-        //        }
+                     }));
+                }
 
-        //        return rows;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-        //public static OrderItem LoadById(int id)
-        //{
-        //    try
-        //    {
+                return rows;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static OrderItem LoadById(int id)
+        {
+            try
+            {
 
-        //        using (ElevateEntities dc = new ElevateEntities())
-        //        {
-        //            tblOrderItem row = dc.tblOrderItems.Where(s => s.Id == id).FirstOrDefault();
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    tblOrderItem row = dc.tblOrderItems.Where(s => s.Id == id).FirstOrDefault();
 
-        //            if (row != null)
-        //            {
-        //                return new OrderItem
-        //                {
-        //                    Id = row.Id,
-        //                    OrderId = row.OrderId,
-        //                    MovieId = row.MovieId,
-        //                    Quantity = row.Quantity,
-        //                    Cost = row.Cost
-        //                };
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("Row does not exist.");
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-        //public static int Update(OrderItem orderItem, bool rollback = false)
-        //{
-        //    try
-        //    {
-        //        int results = 0;
-        //        using (ElevateEntities dc = new ElevateEntities())
-        //        {
-        //            IDbContextTransaction dbContextTransaction = null;
-        //            if (rollback) dbContextTransaction = dc.Database.BeginTransaction();
+                    if (row != null)
+                    {
+                        return new OrderItem
+                        {
+                            Id = row.Id,
+                            OrderId = row.OrderId,
+                            CourseId = row.CourseId,
+                            Quantity = row.Quantity,
+                            Cost = row.Cost
+                        };
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static int Update(OrderItem orderItem, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    IDbContextTransaction dbContextTransaction = null;
+                    if (rollback) dbContextTransaction = dc.Database.BeginTransaction();
 
-        //            tblOrderItem row = dc.tblOrderItems.FirstOrDefault(s => s.Id == orderItem.Id);
+                    tblOrderItem row = dc.tblOrderItems.FirstOrDefault(s => s.Id == orderItem.Id);
 
-        //            if (true)
-        //            {
-        //                row.OrderId = orderItem.OrderId;
-        //                row.MovieId = orderItem.MovieId;
-        //                row.Quantity = orderItem.Quantity;
-        //                row.Cost = orderItem.Cost;
+                    if (true)
+                    {
+                        row.OrderId = orderItem.OrderId;
+                        row.CourseId = orderItem.CourseId;
+                        row.Quantity = orderItem.Quantity;
+                        row.Cost = orderItem.Cost;
 
-        //                results = dc.SaveChanges();
+                        results = dc.SaveChanges();
 
-        //                if (rollback) dbContextTransaction.Rollback();
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("Row does not exist.");
-        //            }
-        //        }
-        //        return results;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+                        if (rollback) dbContextTransaction.Rollback();
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist.");
+                    }
+                }
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        //public static int Delete(int id, bool rollback = false)
-        //{
-        //    try
-        //    {
-        //        int results = 0;
-        //        using (ElevateEntities dc = new ElevateEntities())
-        //        {
-        //            IDbContextTransaction dbContextTransaction = null;
-        //            if (rollback) dbContextTransaction = dc.Database.BeginTransaction();
+        public static int Delete(int id, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    IDbContextTransaction dbContextTransaction = null;
+                    if (rollback) dbContextTransaction = dc.Database.BeginTransaction();
 
-        //            tblOrderItem row = dc.tblOrderItems.FirstOrDefault(s => s.Id == id);
+                    tblOrderItem row = dc.tblOrderItems.FirstOrDefault(s => s.Id == id);
 
-        //            if (true)
-        //            {
-        //                dc.tblOrderItems.Remove(row);
-        //                results = dc.SaveChanges();
+                    if (true)
+                    {
+                        dc.tblOrderItems.Remove(row);
+                        results = dc.SaveChanges();
 
-        //                if (rollback) dbContextTransaction.Rollback();
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("Row does not exist.");
-        //            }
-        //        }
+                        if (rollback) dbContextTransaction.Rollback();
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist.");
+                    }
+                }
 
-        //        return results;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
