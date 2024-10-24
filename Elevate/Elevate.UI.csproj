@@ -21,8 +21,4 @@
     <ProjectReference Include="..\PL\Elevate.PL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

@@ -288,6 +288,65 @@ namespace Elevate.BL
                 throw ex;
             }
         }
+
+        public static void GenerateResetCode(string email)
+        {
+            using (ElevateEntities dc = new ElevateEntities())
+            {
+                tblUser user = dc.tblUsers.FirstOrDefault(x => x.Email == email);
+                if (user == null)
+                {
+                    Random rnd = new Random();
+                    int code = rnd.Next(100000, 999999);
+
+                    user.ResetCode = code.ToString();
+                    user.ResetCodeExpiration = DateTime.Now.AddMinutes(15);
+
+                    dc.SaveChanges();
+
+                    EmailService.SendResetCodeEmail(user.Email, code.ToString());
+
+                }
+            }
+        }
+
+        public static bool ValidateResetCode(string email, string code)
+        {
+            using (ElevateEntities dc = new ElevateEntities())
+            {
+                tblUser user = dc.tblUsers.FirstOrDefault(x => x.Email == email);
+                if (user != null)
+                {
+                    if (user.ResetCode == code && user.ResetCodeExpiration > DateTime.Now)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        public static void UpdatePassword(string email, string newPassword)
+        {
+            using (ElevateEntities dc = new ElevateEntities())
+            {
+                tblUser user = dc.tblUsers.FirstOrDefault(x => x.Email == email);
+                if (user != null)
+                {
+                    user.Password = GetHash(newPassword);
+                    user.ResetCode = null;
+                    user.ResetCodeExpiration = null;
+
+                    dc.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("User Not Found");
+                }
+            }
+        }
+
+
     }
 }
 

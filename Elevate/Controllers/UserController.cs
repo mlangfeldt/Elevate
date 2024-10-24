@@ -1,6 +1,7 @@
 ﻿using BL.Models;
 using Elevate.BL;
 using Elevate.UI.Extensions;
+using Elevate.UI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elevate.Controllers
@@ -27,10 +28,58 @@ namespace Elevate.Controllers
             SetUser(null);
             return RedirectToAction("Index", "Home");
         }
-
+        [HttpGet]
+        [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
+        }
+
+        // POST: User/ForgotPassword
+        [HttpPost]
+        public IActionResult ForgotPassword(string email)
+        {
+            try
+            {
+                UserManager.GenerateResetCode(email);
+                return View("ResetConfirmation");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return View();
+            }
+        }
+
+        // GET: User/ResetPassword
+        [HttpGet]
+        public IActionResult ResetPassword(string email)
+        {
+            var model = new ResetPasswordViewModel { Email = email };
+            return View(model);
+        }
+
+        // POST: User/ResetPassword
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordViewModel model)
+        {
+            if (model.NewPassword != model.ConfirmPassword)
+            {
+                ViewBag.Message = "Passwords do not match.";
+                return View(model);
+            }
+
+            if (UserManager.ValidateResetCode(model.Email, model.Code))
+            {
+                UserManager.UpdatePassword(model.Email, model.NewPassword);
+                TempData["Message"] = "Your password has been reset. You can now log in.";
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ViewBag.Message = "Invalid or expired reset code.";
+                return View(model);
+            }
         }
 
         public IActionResult Reset()

@@ -18,7 +18,8 @@ namespace BL.Models
         public string? FirstName { get; set; }
         [Required]
         public string? LastName { get; set; }
-
+        public string ResetCode { get; set; }
+        public DateTime? ResetCodeExpiration { get; set; }
     }
 
 
