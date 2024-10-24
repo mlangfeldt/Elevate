@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace BL.Models
+namespace Elevate.BL.Models
 {
     public class Order
     {

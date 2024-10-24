@@ -1,4 +1,4 @@
-﻿using BL.Models;
+﻿using Elevate.BL.Models;
 using Elevate.UI.Extensions;
 
 namespace Elevate.UI.Models

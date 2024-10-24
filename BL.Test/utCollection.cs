@@ -1,5 +1,5 @@
-﻿using BL;
-using BL.Models;
+﻿using Elevate.BL;
+using Elevate.BL.Models;
 
 namespace Elevate.BL.Test
 {
