@@ -10,47 +10,43 @@ namespace Elevate.BL.Test
     [TestClass]
     public class utCustomer
     {
-        //[TestMethod]
-        //public void InsertTest()
-        //{
-        //    Customer customer = new Customer
-        //    {
-        //        FirstName = "Jacob",
-        //        LastName = "Peters",
-        //        Address = "123 Nope Rd",
-        //        City = "Grecko",
-        //        State = "WI",
-        //        Zip = "24234",
-        //        Phone = "1234567898",
-        //        UserId = 1234
-        //    };
+        [TestMethod]
+        public void InsertTest()
+        {
+            Customer customer = new Customer
+            {
+                FirstName = "Jacob",
+                LastName = "Peters",
+                Email = "hi@hello.com",
+                UserId = 1234
+            };
 
-        //    Assert.AreEqual(1, CustomerManager.Insert(customer, true));
-        //}
+            Assert.AreEqual(1, CustomerManager.Insert(customer, true));
+        }
 
-        //[TestMethod()]
-        //public void LoadTest()
-        //{
-        //    Assert.AreEqual(3, CustomerManager.Load().Count);
-        //}
+        [TestMethod()]
+        public void LoadTest()
+        {
+            Assert.AreEqual(3, CustomerManager.Load().Count);
+        }
 
-        //[TestMethod()]
-        //public void LoadByIdTest()
-        //{
-        //    Assert.AreEqual(1, CustomerManager.LoadById(1).Id);
-        //}
+        [TestMethod()]
+        public void LoadByIdTest()
+        {
+            Assert.AreEqual(1, CustomerManager.LoadById(1).Id);
+        }
 
-        //[TestMethod]
-        //public void UpdateTest()
-        //{
-        //    Customer customer = CustomerManager.LoadById(3);
-        //    customer.FirstName = "Andrew";
-        //    Assert.IsTrue(CustomerManager.Update(customer, true) > 0);
-        //}
-        //[TestMethod]
-        //public void DeleteTest()
-        //{
-        //    Assert.AreEqual(1, CustomerManager.Delete(2, true));
-        //}
+        [TestMethod]
+        public void UpdateTest()
+        {
+            Customer customer = CustomerManager.LoadById(3);
+            customer.FirstName = "Andrew";
+            Assert.IsTrue(CustomerManager.Update(customer, true) > 0);
+        }
+        [TestMethod]
+        public void DeleteTest()
+        {
+            Assert.AreEqual(1, CustomerManager.Delete(2, true));
+        }
     }
 }
