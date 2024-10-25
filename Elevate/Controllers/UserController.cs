@@ -42,12 +42,12 @@ namespace Elevate.Controllers
             try
             {
                 UserManager.GenerateResetCode(email);
-                return View("ResetConfirmation");
+                return RedirectToAction("ResetPassword");
             }
             catch (Exception ex)
             {
                 ViewBag.Message = ex.Message;
-                return View();
+                return View("ResetConfirmation");
             }
         }
 
