@@ -23,132 +23,169 @@
             </div>
         </header>
 
-        
-        <!-- Blog preview section-->
-        <section class="py-5">            
+
+        <!-- Card 1 -->
+        <section class="py-5">
+            <div class="container">
                 <div class="row gx-5">
+                    <!-- Card 1 -->
                     <div class="col-lg-3 mb-5">
-                        <div class="card h-100 shadow border-0">
+                        <div class="card d-flex flex-column">
                             <a href="@Url.Action("DebtManagement", "Home")">
-                                <img class="card-img-top image-pop" src="~/images/debt.jpg" alt="Debt Management" style="width: 275px; height: auto;" />
+                                <img class="card-img-top image-pop" src="~/images/debt.jpg" alt="Debt Management" style="width: 100%; height: auto;" />
                             </a>
                             <div class="card-body p-4">
                                 <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("DebtManagement", "Home")">
                                     <h5 class="card-title mb-3">Debt Management</h5>
                                 </a>
-                                <p class="card-text mb-0">Learn practical strategies for managing and reducing debt effectively.</p>
+                                <p class="card-text mb-0">Strategies for managing and reducing debt.</p>
                             </div>
-                            <!--Card Footer-->
-                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                <div class="d-flex align-items-end justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                        <div class="small">
-                                            <div class="fw-bold">Kelly Rowan</div>
-                                            <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
-                                        </div>
-                                    </div>
+                        </div>
+                        <!-- Reviews for Debt Management -->
+                        <div class="review-footer">
+                            <div class="review-card">
+                                <div class="star-rating" id="star-rating">
+                                    <input type="radio" id="star5" name="rating1" value="5" />
+                                    <label for="star5" class="star">★</label>
+                                    <input type="radio" id="star4" name="rating1" value="4" />
+                                    <label for="star4" class="star">★</label>
+                                    <input type="radio" id="star3" name="rating1" value="3" />
+                                    <label for="star3" class="star">★</label>
+                                    <input type="radio" id="star2" name="rating1" value="2" />
+                                    <label for="star2" class="star">★</label>
+                                    <input type="radio" id="star1" name="rating1" value="1" />
+                                    <label for="star1" class="star">★</label>
                                 </div>
+                                <p id="rating-display1">You haven't rated yet.</p>
+                                <p>Lorem ipsum dolor sit amet.</p>
+                                <strong>- Kelly Rowan</strong>
                             </div>
                         </div>
                     </div>
-                    <!-- Second Card -->
+                    <!-- Card 2 -->
                     <div class="col-lg-3 mb-5">
-                        <div class="card h-100 shadow border-0">
+                        <div class="card d-flex flex-column">
                             <a href="@Url.Action("Budgeting", "Home")">
-                                <img class="card-img-top image-pop" src="~/images/budget.jpg" alt="Budgeting" style="width: 275px; height: auto;" />
+                                <img class="card-img-top image-pop" src="~/images/budget.jpg" alt="Budgeting" style="width: 100%; height: auto;" />
                             </a>
                             <div class="card-body p-4">
                                 <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Budgeting", "Home")">
                                     <h5 class="card-title mb-3">Budgeting</h5>
                                 </a>
-                                <p class="card-text mb-0">Master the art of budgeting to take control of your finances and achieve your financial goals.</p>
+                                <p class="card-text mb-0">Master budgeting to control finances.</p>
                             </div>
-                            <!--Card Footer-->
-                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                <div class="d-flex align-items-end justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                        <div class="small">
-                                            <div class="fw-bold">Kelly Rowan</div>
-                                            <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
-                                        </div>
-                                    </div>
+                        </div>
+                        <!-- Reviews for Budgeting -->
+                        <div class="review-footer">
+                            <div class="review-card">
+                                <div class="star-rating" id="star-rating">
+                                    <input type="radio" id="star5" name="rating2" value="5" />
+                                    <label for="star5" class="star">★</label>
+                                    <input type="radio" id="star4" name="rating2" value="4" />
+                                    <label for="star4" class="star">★</label>
+                                    <input type="radio" id="star3" name="rating2" value="3" />
+                                    <label for="star3" class="star">★</label>
+                                    <input type="radio" id="star2" name="rating2" value="2" />
+                                    <label for="star2" class="star">★</label>
+                                    <input type="radio" id="star1" name="rating2" value="1" />
+                                    <label for="star1" class="star">★</label>
                                 </div>
+                                <p id="rating-display2">You haven't rated yet.</p>
+                                <p>Lorem ipsum dolor sit amet.</p>
+                                <strong>- Kelly Rowan</strong>
                             </div>
                         </div>
                     </div>
-                    <!-- Third Card -->
+
+                    <!-- Card 3 -->
                     <div class="col-lg-3 mb-5">
-                        <div class="card h-100 shadow border-0">
+                        <div class="card d-flex flex-column">
                             <a href="@Url.Action("Investment", "Home")">
-                                <img class="card-img-top image-pop" src="~/images/invest.jpg" alt="Investment" style="width: 275px; height: auto;" />
+                                <img class="card-img-top image-pop" src="~/images/invest.jpg" alt="Investment" style="width: 100%; height: auto;" />
                             </a>
                             <div class="card-body p-4">
                                 <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Investment", "Home")">
                                     <h5 class="card-title mb-3">Investment</h5>
                                 </a>
-                                <p class="card-text mb-0">Discover essential strategies for building wealth and managing your financial portfolio effectively.</p>
+                                <p class="card-text mb-0">Essential strategies for building wealth.</p>
                             </div>
-                            <!--Card Footer-->
-                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                <div class="d-flex align-items-end justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                        <div class="small">
-                                            <div class="fw-bold">Kelly Rowan</div>
-                                            <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
-                                        </div>
-                                    </div>
+                        </div>
+                        <!-- Reviews for Investment -->
+                        <div class="review-footer">
+                            <div class="review-card">
+                                <div class="star-rating" id="star-rating">
+                                    <input type="radio" id="star5" name="rating3" value="5" />
+                                    <label for="star5" class="star">★</label>
+                                    <input type="radio" id="star4" name="rating3" value="4" />
+                                    <label for="star4" class="star">★</label>
+                                    <input type="radio" id="star3" name="rating3" value="3" />
+                                    <label for="star3" class="star">★</label>
+                                    <input type="radio" id="star2" name="rating3" value="2" />
+                                    <label for="star2" class="star">★</label>
+                                    <input type="radio" id="star1" name="rating3" value="1" />
+                                    <label for="star1" class="star">★</label>
                                 </div>
+                                <p id="rating-display3">You haven't rated yet.</p>
+                                <p>Lorem ipsum dolor sit amet.</p>
+                                <strong>- Kelly Rowan</strong>
                             </div>
                         </div>
                     </div>
-                    <!-- Fourth Card -->
+
+                    <!-- Card 4 -->
                     <div class="col-lg-3 mb-5">
-                        <div class="card h-100 shadow border-0">
+                        <div class="card d-flex flex-column">
                             <a href="@Url.Action("Retirement", "Home")">
-                                <img class="card-img-top image-pop" src="~/images/retire.jpg" alt="Retirement" style="width: 275px; height: auto;" />
+                                <img class="card-img-top image-pop" src="~/images/retire.jpg" alt="Retirement" style="width: 100%; height: auto;" />
                             </a>
                             <div class="card-body p-4">
                                 <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Retirement", "Home")">
                                     <h5 class="card-title mb-3">Retirement</h5>
                                 </a>
-                                <p class="card-text mb-0">Learn how to create a sustainable retirement plan that ensures financial security and peace of mind during your golden years.</p>
+                                <p class="card-text mb-0">Create a sustainable retirement plan.</p>
                             </div>
-                            <!--Card Footer-->
-                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                <div class="d-flex align-items-end justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                        <div class="small">
-                                            <div class="fw-bold">Kelly Rowan</div>
-                                            <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
-                                        </div>
-                                    </div>
+                        </div>
+                        <!-- Reviews for Retirement -->
+                        <div class="review-footer">
+                            <div class="review-card flex-grow-1">
+                                <div class="star-rating" id="star-rating">
+                                    <input type="radio" id="star5" name="rating4" value="5" />
+                                    <label for="star5" class="star">★</label>
+                                    <input type="radio" id="star4" name="rating4" value="4" />
+                                    <label for="star4" class="star">★</label>
+                                    <input type="radio" id="star3" name="rating4" value="3" />
+                                    <label for="star3" class="star">★</label>
+                                    <input type="radio" id="star2" name="rating4" value="2" />
+                                    <label for="star2" class="star">★</label>
+                                    <input type="radio" id="star1" name="rating4" value="1" />
+                                    <label for="star1" class="star">★</label>
                                 </div>
+                                <p id="rating-display4">You haven't rated yet.</p>
+                                <p>Lorem ipsum dolor sit amet.</p>
+                                <strong>- Kelly Rowan</strong>
                             </div>
                         </div>
                     </div>
-                <!-- Call to action-->
-                <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
-                    <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
-                        <div class="mb-4 mb-xl-0">
-                            <div class="fs-3 fw-bold text-white">Stay updated on new courses!</div>
-                            <div class="text-white-50">Sign up for our newsletter to receive the latest course updates and offerings.</div>
-                        </div>
-                        <div class="ms-xl-4">
-                            <div class="input-group mb-2">
-                                <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
-                                <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
-                            </div>
-                            <div class="small text-white-50">We care about privacy, and will never share your data.</div>
-                        </div>
-                    </div>
-                </aside>
+
+                </div>
             </div>
         </section>
-    </main>
+        <!-- Call to action-->
+        <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5 mb-4">
+                <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+                <div class="mb-4 mb-xl-0">
+                    <div class="fs-3 fw-bold text-white">Stay updated on new courses!</div>
+                    <div class="text-white-50">Sign up for our newsletter to receive the latest course updates and offerings.</div>
+                </div>
+                <div class="ms-xl-4">
+                    <div class="input-group mb-2">
+                        <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
+                        <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
+                    </div>
+                    <div class="small text-white-50">We care about privacy, and will never share your data.</div>
+                </div>
+            </div>
+        </aside>
     <!-- Footer-->
     <footer class="bg-dark py-4 mt-auto">
         <div class="container px-5">
@@ -164,5 +201,27 @@
             </div>
         </div>
     </footer>
+    <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const starGroups = document.querySelectorAll('.star-rating');
+
+                starGroups.forEach((group, index) => {
+                    const stars = group.querySelectorAll('input'); // Get all stars in the current group
+                    const ratingDisplay = document.getElementById(`rating-display${index + 1}`); // Adjust ID dynamically
+
+                    function updateRatingDisplay(value) {
+                        ratingDisplay.textContent = `You rated this ${value} out of 5.`;
+                    }
+
+                    stars.forEach(star => {
+                        star.addEventListener('change', () => {
+                            const ratingValue = star.value;
+                            updateRatingDisplay(ratingValue);
+                        });
+                    });
+                });
+            });
+
+    </script>
 </body>
 </html>
