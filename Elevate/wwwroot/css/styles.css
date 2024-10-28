@@ -10904,37 +10904,42 @@ html {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    background-color: #f9f9f9; /* Optional: Background color for the card */
-    border: 1px solid #ddd; /* Optional: Adds a border for visibility */
-    border-radius: 5px; /* Optional: Rounds the corners */
-    min-height: 150px; /* Set a minimum height to keep cards uniform */
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    min-height: 150px; 
     max-height: 300px;
-    overflow-y: auto; /* Allows for scrolling if content exceeds max height */
-    flex-grow: 1; /* Allows the card to grow as needed */
+    overflow-y: auto; 
+    flex-grow: 1; 
     word-wrap: break-word;
 }
 
 .star-rating {
-    display: flex; /* Keep stars in a horizontal line */
-    margin-bottom: 10px; /* Space below the star rating */
+    display: flex;
+    margin-bottom: 10px; 
 }
 
 #rating-display {
-    margin-bottom: 5px; /* Space below the rating display */
+    margin-bottom: 5px; 
 }
 
 .review-footer {
-    display: flex; /* Maintain flex layout */
-    flex-direction: column; /* Stack review-card vertically */
-    margin-top: 10px; /* Space above the review section */
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 10px; 
     margin-bottom: 20px;
     flex-grow: 1;
 }
 
 .card {
-    border: 1px solid #ddd; /* Optional: Adds a border for visibility */
-    border-radius: 5px; /* Optional: Rounds the corners */
-    overflow: hidden; /* Prevents overflow if content exceeds */
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    overflow: hidden; /
+}
+
+.image-pop {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 

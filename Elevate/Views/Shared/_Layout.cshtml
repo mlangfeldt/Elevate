@@ -116,7 +116,7 @@
                             <form asp-controller="User" asp-action="Login" method="post">
                                 <div class="mb-3">
                                     <label for="Email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email required" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="Password" class="form-label">Password</label>
@@ -138,23 +138,23 @@
                         <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
                             <form asp-controller="User" asp-action="Create" method="post">
                                 <div class="mb-3">
-                                    <label for="firstName" class="form-label">First Name</label>
+                                    <label for="firstName" class="form-label">First Name<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="firstName" name="firstName" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <label for="lastName" class="form-label">Last Name<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="lastName" name="lastName" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="signupPassword" class="form-label">Password</label>
+                                    <label for="signupPassword" class="form-label">Password<span class="text-danger">*</span></label>
                                     <input type="password" class="form-control" id="signupPassword" name="password" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <label for="confirmPassword" class="form-label">Confirm Password<span class="text-danger">*</span></label>
                                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                 </div>
                                 <div class="d-flex justify-content-center">
