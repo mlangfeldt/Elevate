@@ -289,12 +289,12 @@ namespace Elevate.BL
             }
         }
 
-        public static void GenerateResetCode(string email)
+        public static string GenerateResetCode(string email)
         {
             using (ElevateEntities dc = new ElevateEntities())
             {
                 tblUser user = dc.tblUsers.FirstOrDefault(x => x.Email == email);
-                if (user == null)
+                if (user != null)
                 {
                     Random rnd = new Random();
                     int code = rnd.Next(100000, 999999);
@@ -306,7 +306,9 @@ namespace Elevate.BL
 
                     EmailService.SendResetCodeEmail(user.Email, code.ToString());
 
+                    return user.ResetCode;
                 }
+                return "null";
             }
         }
 
@@ -314,6 +316,7 @@ namespace Elevate.BL
         {
             using (ElevateEntities dc = new ElevateEntities())
             {
+
                 tblUser user = dc.tblUsers.FirstOrDefault(x => x.Email == email);
                 if (user != null)
                 {

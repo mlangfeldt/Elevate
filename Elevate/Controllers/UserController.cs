@@ -1,7 +1,6 @@
 ﻿using BL.Models;
 using Elevate.BL;
 using Elevate.UI.Extensions;
-using Elevate.UI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elevate.Controllers
@@ -41,7 +40,10 @@ namespace Elevate.Controllers
         {
             try
             {
-                UserManager.GenerateResetCode(email);
+                string resetCode = UserManager.GenerateResetCode(email);
+
+                HttpContext.Session.SetString("ResetEmail", email);
+                HttpContext.Session.SetString("ResetCode", resetCode);
                 return RedirectToAction("ResetPassword");
             }
             catch (Exception ex)
@@ -55,25 +57,28 @@ namespace Elevate.Controllers
         [HttpGet]
         public IActionResult ResetPassword(string email)
         {
-            var model = new ResetPasswordViewModel { Email = email };
+            var model = new User { Email = email };
             return View(model);
         }
 
         // POST: User/ResetPassword
         [HttpPost]
-        public IActionResult ResetPassword(ResetPasswordViewModel model)
+        public IActionResult ResetPassword(User model)
         {
-            if (model.NewPassword != model.ConfirmPassword)
+            string email = HttpContext.Session.GetString("ResetEmail");
+            string sessionResetCode = HttpContext.Session.GetString("ResetCode");
+
+            if (model.NewPassword != model.ConfirmNewPassword)
             {
                 ViewBag.Message = "Passwords do not match.";
                 return View(model);
             }
 
-            if (UserManager.ValidateResetCode(model.Email, model.Code))
+            if (UserManager.ValidateResetCode(email, sessionResetCode))
             {
-                UserManager.UpdatePassword(model.Email, model.NewPassword);
+                UserManager.UpdatePassword(email, model.NewPassword);
                 TempData["Message"] = "Your password has been reset. You can now log in.";
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
             }
             else
             {

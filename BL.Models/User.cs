@@ -18,8 +18,11 @@ namespace BL.Models
         public string? FirstName { get; set; }
         [Required]
         public string? LastName { get; set; }
-        public string ResetCode { get; set; }
-        public DateTime? ResetCodeExpiration { get; set; }
+        [Compare("NewPassword", ErrorMessage = "passwords do not match")]
+        public string? ConfirmNewPassword { get; set; }
+        public string? NewPassword { get; set; }
+        public string? ResetCode { get; set; }
+        public DateTime ResetCodeExpiration { get; set; }
     }
 
 

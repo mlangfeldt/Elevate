@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using System.Web;
 
 namespace Elevate.BL
 {
@@ -8,20 +7,17 @@ namespace Elevate.BL
     {
         public static void SendResetCodeEmail(string email, string code)
         {
-            string resetUrl = $"https://yourwebsite.com/User/ResetPassword?email={HttpUtility.UrlEncode(email)}";
-            string body = $"Your password reset code is: {code}\n\n" +
-                          $"Please click the link below to reset your password:\n{resetUrl}";
+            string body = $"Your password reset code is: {code}";
 
-
-            var smtpClient = new SmtpClient("smtp.yourserver.com")
+            var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 // 7135
                 Port = 587,
-                Credentials = new NetworkCredential("your_email@example.com", "your_email_password"),
+                Credentials = new NetworkCredential("knudtdaw0000@gmail.com", "uesf riic xrrl omgs"),
                 EnableSsl = true,
             };
 
-            smtpClient.Send("your_email@example.com", email, resetUrl, body);
+            smtpClient.Send("knudtdaw0000@gmail.com", email, "Reset Password Code", body);
 
         }
 
