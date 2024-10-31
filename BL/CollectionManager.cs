@@ -8,13 +8,11 @@ namespace Elevate.BL
     {
         public static int Insert(Collection collection, bool rollback = false)
         {
-
             try
             {
                 int results = 0;
                 using (ElevateEntities dc = new ElevateEntities())
                 {
-
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -36,12 +34,10 @@ namespace Elevate.BL
                     if (rollback) transaction.Rollback();
 
                     return results;
-
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -62,7 +58,6 @@ namespace Elevate.BL
 
                     if (row != null)
                     {
-
                         row.CourseId = collection.CourseId;
                         row.UserId = collection.UserId;
 
@@ -74,14 +69,11 @@ namespace Elevate.BL
                     {
                         throw new Exception("Row was not found.");
                     }
-
                     return results;
-
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -93,7 +85,6 @@ namespace Elevate.BL
                 int results = 0;
                 using (ElevateEntities dc = new ElevateEntities())
                 {
-
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -101,7 +92,6 @@ namespace Elevate.BL
 
                     if (row != null)
                     {
-
                         dc.tblCollections.Remove(row);
 
                         results = dc.SaveChanges();
@@ -112,69 +102,43 @@ namespace Elevate.BL
                     {
                         throw new Exception("Row was not found.");
                     }
-
                     return results;
-
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        /*public static Collection LoadById(int id)
+        public static Collection LoadById(int id)
         {
-
             try
             {
-
                 using (ElevateEntities dc = new ElevateEntities())
                 {
-
-                    tblCollection row = dc.tblCollections.FirstOrDefault(p => p.Id == id);
+                    tblCollection row = dc.tblCollections.Where(s => s.Id == id).FirstOrDefault();
 
                     if (row != null)
                     {
-                        Collection collection = CustomerManager.LoadById(row.CustomerId);
-                        string custfn = cust.LastName + ", " + cust.FirstName;
-
-                        User user = UserManager.LoadById(row.UserId);
-
-                        string username = user.UserId;
-                        string userfullname = user.FullName;
-
-                        Order order = new Order
+                        return new Collection
                         {
-
-
                             Id = row.Id,
-                            CustomerId = row.CustomerId,
-                            CustomerName = custfn,
-                            OrderDate = row.OrderDate,
-                            UserId = row.UserId,
-                            UserName = username,
-                            UserFullName = userfullname,
-                            ShipDate = row.ShipDate,
-
+                            CourseId = row.CourseId,
+                            UserId = row.UserId
                         };
-                        return order;
-
                     }
                     else
                     {
-
-                        throw new Exception("Row was not found.");
+                        throw new Exception("Row does not exist.");
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
-        }*/
+        }
 
         public static List<Collection> Load()
         {
@@ -203,10 +167,8 @@ namespace Elevate.BL
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
     }
 }

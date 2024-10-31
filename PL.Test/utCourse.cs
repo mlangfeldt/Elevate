@@ -52,6 +52,7 @@ namespace Elevate.PL.Test
             row.Id = -99;
             row.Name = "test";
             row.Description = "tarzan is the man";
+            row.Cost = 15;
             // Insert the row into the table
             dc.tblCourses.Add(row);
             int results = dc.SaveChanges();

@@ -10,4 +10,6 @@ public partial class tblCourse
     public string Name { get; set; } = null!;
 
     public string Description { get; set; } = null!;
+
+    public double Cost { get; set; }
 }

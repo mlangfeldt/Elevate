@@ -35,7 +35,7 @@ public partial class ElevateEntities : DbContext
     {
         modelBuilder.Entity<tblCollection>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07D8A319DB");
+            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07280C3AE5");
 
             entity.ToTable("tblCollection");
 
@@ -44,7 +44,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblCourse>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC078CAAB492");
+            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC07585CE6BD");
 
             entity.ToTable("tblCourse");
 
@@ -55,11 +55,14 @@ public partial class ElevateEntities : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.Cost)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<tblCustomer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC079CC07D56");
+            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC072ABC0911");
 
             entity.ToTable("tblCustomer");
 
@@ -77,7 +80,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC077DCE2E1F");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07FA96AC96");
 
             entity.ToTable("tblOrder");
 
@@ -87,7 +90,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblOrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07E70C4FE2");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC072E566058");
 
             entity.ToTable("tblOrderItem");
 
@@ -96,7 +99,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07A6DD9573");
+            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07E3305ECE");
 
             entity.ToTable("tblUser");
 

@@ -23,11 +23,11 @@ namespace Elevate.BL.Test
             Assert.AreEqual(1, CourseManager.Insert(course, true));
         }
 
-        //[TestMethod()]
-        //public void LoadTest()
-        //{
-        //    Assert.AreEqual(3, CourseManager.Load().Count);
-        //}
+        [TestMethod()]
+        public void LoadTest()
+        {
+            Assert.AreEqual(3, CourseManager.Load().Count);
+        }
 
         [TestMethod()]
         public void LoadByIdTest()

@@ -18,9 +18,9 @@ namespace Elevate.BL.Test
             ShoppingCartManager.Add(cart, list[0]);
             ShoppingCartManager.Add(cart, list[1]);
             Assert.AreEqual(2, cart.TotalCount);
-            Assert.AreEqual(100 * cart.TotalCount, cart.SubTotal);
-            Assert.AreEqual(100 * cart.TotalCount * .055, cart.Tax);
-            Assert.AreEqual(100 * cart.TotalCount + 100 * cart.TotalCount * .055, cart.Total);
+            Assert.AreEqual(28.98, cart.SubTotal);
+            Assert.AreEqual(1.5939, cart.Tax);
+            Assert.AreEqual(30.57, Math.Round(cart.Total, 2));
         }
     }
 }

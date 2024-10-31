@@ -182,7 +182,8 @@ namespace Elevate.BL
                            {
                                p.Id,
                                p.Name,
-                               p.Description
+                               p.Description,
+                               p.Cost
                            }).ToList();
 
                 if (row != null)
@@ -193,7 +194,8 @@ namespace Elevate.BL
                         {
                             Id = p.Id,
                             Name = p.Name,
-                            Description = p.Description
+                            Description = p.Description,
+                            Cost = p.Cost
                         });
                     }
                     return rows;
