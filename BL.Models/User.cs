@@ -5,6 +5,7 @@ namespace BL.Models
     public class User
     {
         public int Id { get; set; }
+    
         public string? Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
@@ -23,6 +24,9 @@ namespace BL.Models
         public string? NewPassword { get; set; }
         public string? ResetCode { get; set; }
         public DateTime ResetCodeExpiration { get; set; }
+
+        public int EmailConfirmed { get; set; }
+        public string ConfirmationCode { get; set; }
     }
 
 

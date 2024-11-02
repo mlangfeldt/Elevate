@@ -1,7 +1,10 @@
 ﻿using BL.Models;
 using Elevate.PL;
+using Microsoft.AspNetCore.Http;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 
 namespace Elevate.BL
@@ -46,12 +49,20 @@ namespace Elevate.BL
                     newuser.Password = GetHash(user.Password);
                     newuser.FirstName = user.FirstName;
                     newuser.LastName = user.LastName;
+                    newuser.EmailConfirmed = 0;
+                    newuser.ConfirmationCode = Guid.NewGuid().ToString("N");
 
                     dc.tblUsers.Add(newuser);
 
                     results = dc.SaveChanges();
 
                     if (rollback) transaction.Rollback();
+
+                    //string body = "Welcome to Elevate!";
+                    //body += "<br /><br />Please click the following link to activate your account";
+                    //body += $"<br /><a href = '" + string.Format("{0}://{1}/Home/Activation/{2}", Context.Request.Scheme, Context.Request.Authority, newuser.ConfirmationCode) + "'>Click here to activate your account.</a>";
+                                        
+                    //EmailService.SendConfirmationCodeEmail(body, newuser.Email, newuser.ConfirmationCode);
 
                     return results;
 
@@ -121,7 +132,8 @@ namespace Elevate.BL
                         entity.FirstName = user.FirstName;
                         entity.LastName = user.LastName;
                         entity.Email = user.Email;
-                        entity.Password = GetHash(user.Password);
+                        //entity.Password = GetHash(user.Password);
+                        entity.EmailConfirmed = user.EmailConfirmed;
                         results = dc.SaveChanges();
                     }
                     else
@@ -139,6 +151,89 @@ namespace Elevate.BL
                 throw;
             }
 
+        }
+
+        public static bool EmailExists(string email)
+        {
+
+            bool FoundEmail = false;
+
+            try
+                {
+
+                    using (ElevateEntities dc = new ElevateEntities())
+                    {
+
+                        tblUser row = dc.tblUsers.FirstOrDefault(p => p.Email == email);
+
+                        if (row != null)
+                        {
+
+                            FoundEmail = true;
+                            
+                        }
+                        else
+                        {
+
+                            FoundEmail = false;
+                           
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            return FoundEmail;
+
+        }
+
+
+        public static User LoadByConfirmationCode(string code)
+        {
+
+            try
+            {
+
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+
+                    tblUser row = dc.tblUsers.FirstOrDefault(p => p.ConfirmationCode == code);
+
+                    if (row != null)
+                    {
+
+                        User user = new User()
+                        {
+
+                            Id = row.Id,
+                            Email = row.Email,
+                            Password = row.Password,
+                            FirstName = row.FirstName,
+                            LastName = row.LastName,
+                            EmailConfirmed = row.EmailConfirmed,
+                            ConfirmationCode = row.ConfirmationCode
+
+
+                        };
+
+                        return user;
+
+                    }
+                    else
+                    {
+
+                        throw new Exception("Row was not found.");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public static User LoadById(int id)
@@ -162,7 +257,53 @@ namespace Elevate.BL
                             Email = row.Email,
                             Password = row.Password,
                             FirstName = row.FirstName,
-                            LastName = row.LastName
+                            LastName = row.LastName,
+                            EmailConfirmed = row.EmailConfirmed,
+                            ConfirmationCode = row.ConfirmationCode
+
+
+                        };
+
+                        return user;
+
+                    }
+                    else
+                    {
+
+                        throw new Exception("Row was not found.");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static User LoadByEmail(string email)
+        {
+
+            try
+            {
+
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+
+                    tblUser row = dc.tblUsers.FirstOrDefault(p => p.Email == email);
+
+                    if (row != null)
+                    {
+
+                        User user = new User()
+                        {
+
+                            Id = row.Id,
+                            Email = row.Email,
+                            Password = row.Password,
+                            FirstName = row.FirstName,
+                            LastName = row.LastName,
+                            EmailConfirmed = row.EmailConfirmed,
+                            ConfirmationCode = row.ConfirmationCode
 
                         };
 
@@ -199,7 +340,8 @@ namespace Elevate.BL
                          u.FirstName,
                          u.LastName,
                          u.Email,
-                         u.Password
+                         u.Password,
+                         u.EmailConfirmed
                      })
                      .ToList()
                      .ForEach(user => list.Add(new User
@@ -208,7 +350,8 @@ namespace Elevate.BL
                          FirstName = user.FirstName,
                          LastName = user.LastName,
                          Email = user.Email,
-                         Password = user.Password
+                         Password = user.Password,
+                         EmailConfirmed = user.EmailConfirmed
                      }));
                 }
                 return list;
@@ -232,20 +375,24 @@ namespace Elevate.BL
                         using (ElevateEntities dc = new ElevateEntities())
                         {
                             tblUser tbluser = dc.tblUsers.FirstOrDefault(u => u.Email == user.Email);
+                            
                             if (tbluser != null)
                             {
-                                if (tbluser.Password == GetHash(user.Password))
-                                {
-                                    user.Id = tbluser.Id;
-                                    user.Email = tbluser.Email;
-                                    user.FirstName = tbluser.FirstName;
-                                    user.LastName = tbluser.LastName;
-                                    return true;
-                                }
-                                else
-                                {
-                                    throw new LoginFailureException();
-                                }
+                                                         
+                                    if (tbluser.Password == GetHash(user.Password))
+                                    {
+                                        user.Id = tbluser.Id;
+                                        user.Email = tbluser.Email;
+                                        user.FirstName = tbluser.FirstName;
+                                        user.LastName = tbluser.LastName;
+                                        user.EmailConfirmed = tbluser.EmailConfirmed;
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        throw new LoginFailureException();
+                                    }
+                                
                             }
                             else
                             {
@@ -311,6 +458,8 @@ namespace Elevate.BL
                 return "null";
             }
         }
+
+
 
         public static bool ValidateResetCode(string email, string code)
         {

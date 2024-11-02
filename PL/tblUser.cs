@@ -18,4 +18,9 @@ public partial class tblUser
     public string? ResetCode { get; set; }
 
     public DateTime? ResetCodeExpiration { get; set; }
+
+    public int EmailConfirmed { get; set; }
+
+    public string ConfirmationCode { get; set; }
+
 }

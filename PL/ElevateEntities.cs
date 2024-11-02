@@ -117,6 +117,11 @@ public partial class ElevateEntities : DbContext
                 .HasMaxLength(6)
                 .IsUnicode(false);
             entity.Property(e => e.ResetCodeExpiration).HasColumnType("datetime");
+            entity.Property(e => e.EmailConfirmed);
+            entity.Property(e => e.ConfirmationCode)
+                .HasMaxLength(32)
+                .IsUnicode(false);
+
         });
 
         OnModelCreatingPartial(modelBuilder);
