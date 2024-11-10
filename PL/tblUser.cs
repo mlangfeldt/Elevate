@@ -14,4 +14,13 @@ public partial class tblUser
     public string FirstName { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
+
+    public string? ResetCode { get; set; }
+
+    public DateTime? ResetCodeExpiration { get; set; }
+
+    public int EmailConfirmed { get; set; }
+
+    public string ConfirmationCode { get; set; }
+
 }

@@ -35,7 +35,7 @@ public partial class ElevateEntities : DbContext
     {
         modelBuilder.Entity<tblCollection>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07280C3AE5");
+            entity.HasKey(e => e.Id).HasName("PK__tblColle__3214EC07D9ED5036");
 
             entity.ToTable("tblCollection");
 
@@ -44,7 +44,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblCourse>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC07585CE6BD");
+            entity.HasKey(e => e.Id).HasName("PK__tblCours__3214EC071D4F291F");
 
             entity.ToTable("tblCourse");
 
@@ -55,14 +55,11 @@ public partial class ElevateEntities : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Cost)
-                .HasMaxLength(50)
-                .IsUnicode(false);
         });
 
         modelBuilder.Entity<tblCustomer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC072ABC0911");
+            entity.HasKey(e => e.Id).HasName("PK__tblCusto__3214EC07166D664D");
 
             entity.ToTable("tblCustomer");
 
@@ -80,7 +77,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07FA96AC96");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07EB008605");
 
             entity.ToTable("tblOrder");
 
@@ -90,7 +87,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblOrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC072E566058");
+            entity.HasKey(e => e.Id).HasName("PK__tblOrder__3214EC07A565D7B9");
 
             entity.ToTable("tblOrderItem");
 
@@ -99,7 +96,7 @@ public partial class ElevateEntities : DbContext
 
         modelBuilder.Entity<tblUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC07E3305ECE");
+            entity.HasKey(e => e.Id).HasName("PK__tblUser__3214EC077F7F1798");
 
             entity.ToTable("tblUser");
 
@@ -116,6 +113,15 @@ public partial class ElevateEntities : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.ResetCode)
+                .HasMaxLength(6)
+                .IsUnicode(false);
+            entity.Property(e => e.ResetCodeExpiration).HasColumnType("datetime");
+            entity.Property(e => e.EmailConfirmed);
+            entity.Property(e => e.ConfirmationCode)
+                .HasMaxLength(32)
+                .IsUnicode(false);
+
         });
 
         OnModelCreatingPartial(modelBuilder);
