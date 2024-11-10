@@ -1,9 +1,4 @@
-﻿using Azure.Core;
-using BL.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Net.Mail;
 
 namespace Elevate.BL
@@ -44,7 +39,7 @@ namespace Elevate.BL
                 Port = 587,
                 Credentials = new NetworkCredential("fvtcelevate@gmail.com", "amwu gsoa mimh hoyn"),
                 EnableSsl = true,
-              
+
             };
 
             MailMessage mailMessage = new MailMessage();
