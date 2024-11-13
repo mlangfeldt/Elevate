@@ -10946,6 +10946,16 @@ html {
     color: rgba(13, 110, 253, 1);
 }
 
+.navbar-toggler-icon {
+    border-color: white
+}
+
+@media (max-width: 767px) {
+    .navbar-toggler-icon {
+        background-color: white;
+    }
+}
+
 
 
 
