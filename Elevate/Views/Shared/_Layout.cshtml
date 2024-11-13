@@ -77,12 +77,26 @@
                                 <i class="fa-solid fa-cart-shopping"></i> Cart
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <!-- Search Bar -->
+                            <div class="collapse navbar-collapse navbar-ex1-collapse d-flex justify-content-between">
+                                <form class="navbar-form pull-right" role="search" method="GET" action="/search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search for Courses" name="search" id="search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default text-light" type="submit">
+                                                <i class="fas fa-search"></i> Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
-        </nav>
     </header>
-
     <div class="container">
         @RenderBody()
     </div>
