@@ -24,6 +24,7 @@ namespace Elevate.Controllers
             var courses = tblCourses.Select(c => new Elevate.BL.Models.Course
             {
                 Id = c.Id,
+                ImgUrl = c.ImgUrl,
                 Name = c.Name,
                 Description = c.Description,
                 Cost = c.Cost

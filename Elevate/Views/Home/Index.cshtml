@@ -28,7 +28,7 @@
                         <div class="col-lg-3 mb-5">
                             <div class="card d-flex flex-column">
                                 <a href="@Url.Action("CourseDetails", "Home", new { id = course.Id })">
-                                    <img class="card-img-top image-pop" src="~/images/placeholder.jpg" alt="@course.Name" style="width: 100%; height: auto;" />
+                                    <img class="card-img-top image-pop" src="~/images/@course.ImgUrl" alt="@course.Name" style="width: 100%; height: auto;" />
                                 </a>
                                 <div class="card-body p-4">
                                     <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("CourseDetails", "Home", new { id = course.Id })">
