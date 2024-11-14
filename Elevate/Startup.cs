@@ -1,13 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Elevate.PL;
+using Microsoft.EntityFrameworkCore;
 
 namespace Elevate.UI
 {
@@ -23,6 +15,9 @@ namespace Elevate.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ElevateEntities>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ElevateDB")));
+
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {

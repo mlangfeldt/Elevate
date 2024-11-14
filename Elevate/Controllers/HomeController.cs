@@ -10,40 +10,53 @@ namespace Elevate.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ElevateEntities _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        // Combined constructor
+        public HomeController(ILogger<HomeController> logger, ElevateEntities context)
         {
             _logger = logger;
-        }
-
-        public HomeController(ElevateEntities context)
-        {
             _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var tblCourses = _context.tblCourses.ToList();
+
+            var courses = tblCourses.Select(c => new Elevate.BL.Models.Course
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Cost = c.Cost
+            }).ToList();
+
+            return View(courses);
         }
+
         public IActionResult About()
         {
             return View();
         }
+
         public IActionResult Courses()
         {
             return View();
         }
+
         public IActionResult Contact()
         {
             return View();
         }
+
         public IActionResult Cart()
         {
             return View();
         }
+
         public IActionResult Library()
         {
             return View();
         }
+
         public IActionResult Retirement()
         {
             return View();
@@ -63,9 +76,6 @@ namespace Elevate.Controllers
         {
             return View();
         }
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

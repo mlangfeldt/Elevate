@@ -1,11 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Elevate.BL.Models.Course>
+
 @{
     ViewData["Title"] = "Home Page";
 }
-
-
 
 <body class="d-flex flex-column h-100">
     <main class="flex-shrink-0">
@@ -26,62 +23,23 @@
         <section class="py-5">
             <div class="container">
                 <div class="row gx-5">
-                    <!-- Card 1 -->
-                    <div class="col-lg-3 mb-5">
-                        <div class="card d-flex flex-column">
-                            <a href="@Url.Action("DebtManagement", "Home")">
-                                <img class="card-img-top image-pop" src="~/images/debt.jpg" alt="Debt Management" style="width: 100%; height: auto;" />
-                            </a>
-                            <div class="card-body p-4">
-                                <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("DebtManagement", "Home")">
-                                    <h5 class="card-title mb-3">Debt Management</h5>
+                    @foreach (var course in Model)
+                    {
+                        <div class="col-lg-3 mb-5">
+                            <div class="card d-flex flex-column">
+                                <a href="@Url.Action("CourseDetails", "Home", new { id = course.Id })">
+                                    <img class="card-img-top image-pop" src="~/images/placeholder.jpg" alt="@course.Name" style="width: 100%; height: auto;" />
                                 </a>
-                                <p class="card-text mb-0">Strategies for managing and reducing debt.</p>
+                                <div class="card-body p-4">
+                                    <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("CourseDetails", "Home", new { id = course.Id })">
+                                        <h5 class="card-title mb-3">@course.Name</h5>
+                                    </a>
+                                    <p class="card-text mb-0">@course.Description</p>
+                                    <p class="card-text mb-0">Cost: $@course.Cost</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="col-lg-3 mb-5">
-                        <div class="card d-flex flex-column">
-                            <a href="@Url.Action("Budgeting", "Home")">
-                                <img class="image-pop" src="~/images/budget.jpg" alt="Budgeting" style="width: 100%; height: auto;" />
-                            </a>
-                            <div class="card-body p-4">
-                                <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Budgeting", "Home")">
-                                    <h5 class="card-title mb-3">Budgeting</h5>
-                                </a>
-                                <p class="card-text mb-0">Master budgeting to control finances.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="col-lg-3 mb-5">
-                        <div class="card d-flex flex-column">
-                            <a href="@Url.Action("Investment", "Home")">
-                                <img class="image-pop" src="~/images/invest.jpg" alt="Investment" style="width: 100%; height: auto;" />
-                            </a>
-                            <div class="card-body p-4">
-                                <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Investment", "Home")">
-                                    <h5 class="card-title mb-3">Investment</h5>
-                                </a>
-                                <p class="card-text mb-0">Essential strategies for building wealth.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 4 -->
-                    <div class="col-lg-3 mb-5">
-                        <div class="card d-flex flex-column">
-                            <a href="@Url.Action("Retirement", "Home")">
-                                <img class="image-pop" src="~/images/retire.jpg" alt="Retirement" style="width: 100%; height: auto;" />
-                            </a>
-                            <div class="card-body p-4">
-                                <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Retirement", "Home")">
-                                    <h5 class="card-title mb-3">Retirement</h5>
-                                </a>
-                                <p class="card-text mb-0">Create a sustainable retirement plan.</p>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </section>
@@ -102,7 +60,7 @@
             </div>
         </aside>
     </main>
-    <!-- Footer-->
+    <!-- Footer -->
     <footer class="bg-dark py-4 mt-auto">
         <div class="container px-5">
             <div class="row align-items-center justify-content-between flex-column flex-sm-row">
@@ -118,4 +76,3 @@
         </div>
     </footer>
 </body>
-</html>
