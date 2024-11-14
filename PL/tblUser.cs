@@ -21,6 +21,5 @@ public partial class tblUser
 
     public int EmailConfirmed { get; set; }
 
-    public string ConfirmationCode { get; set; }
-
+    public string? ConfirmationCode { get; set; }
 }

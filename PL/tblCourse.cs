@@ -12,4 +12,6 @@ public partial class tblCourse
     public string Description { get; set; } = null!;
 
     public double Cost { get; set; }
+
+    public string ImgUrl { get; set; } = null!;
 }
