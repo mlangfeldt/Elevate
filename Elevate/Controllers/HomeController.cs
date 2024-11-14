@@ -32,50 +32,6 @@ namespace Elevate.Controllers
             return View(courses);
         }
 
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        public IActionResult Courses()
-        {
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            return View();
-        }
-
-        public IActionResult Cart()
-        {
-            return View();
-        }
-
-        public IActionResult Library()
-        {
-            return View();
-        }
-
-        public IActionResult Retirement()
-        {
-            return View();
-        }
-
-        public IActionResult Budgeting()
-        {
-            return View();
-        }
-
-        public IActionResult DebtManagement()
-        {
-            return View();
-        }
-
-        public IActionResult Investment()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
