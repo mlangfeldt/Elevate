@@ -1,4 +1,5 @@
 using Elevate.Models;
+using Elevate.PL;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +8,16 @@ namespace Elevate.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ElevateEntities _context;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+
+        public HomeController(ElevateEntities context)
+        {
+            _context = context;
         }
 
         public IActionResult Index()
