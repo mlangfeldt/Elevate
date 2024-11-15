@@ -1,0 +1,73 @@
+﻿@model Elevate.BL.Models.Course
+
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <!-- Header-->
+        <header class="bg-dark py-3 text-white text-center">
+            <h1>@Model.Name</h1>
+        </header>
+
+        <!-- Course Details Section -->
+        <section class="py-5 bg-light">
+            <div class="container px-5 my-5">
+                <div class="row gx-5">
+                    <div class="col-lg-6">
+                        <img src="~/images/@Model.ImgUrl" class="img-fluid rounded" alt="@Model.Name" />
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="mb-4">Course Overview</h2>
+                        <p>@Model.Description</p>
+                        <h4 class="mt-4">Cost: <span class="text-success">@Model.Cost</span></h4>
+                        <div class="mt-5">
+                            <a href="/Courses/Enroll/@Model.Id" class="btn btn-primary btn-lg">Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Information Section -->
+        <section class="py-5">
+            <div class="container px-5">
+                <h3 class="text-center mb-4">Why Choose This Course?</h3>
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="icon-box">
+                            <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                            <h5>Expert Instructors</h5>
+                            <p>Learn from industry professionals with years of experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="icon-box">
+                            <i class="fas fa-certificate fa-3x text-success mb-3"></i>
+                            <h5>Certification</h5>
+                            <p>Receive a certificate of completion to boost your career.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="icon-box">
+                            <i class="fas fa-laptop-code fa-3x text-info mb-3"></i>
+                            <h5>Improved Knowledge</h5>
+                            <p>Gain the knowledge to improve your personal life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark py-4 mt-auto">
+        <div class="container px-5 text-center">
+            <div class="small text-white">&copy; Elevate 2024. All rights reserved.</div>
+            <div class="mt-2">
+                <a class="link-light small" href="#!">Privacy</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="#!">Terms</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="#!">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>

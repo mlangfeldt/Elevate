@@ -1,4 +1,5 @@
-﻿using Elevate.PL;
+﻿using Elevate.BL.Models;
+using Elevate.PL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elevate.UI.Controllers
@@ -29,5 +30,27 @@ namespace Elevate.UI.Controllers
 
             return View(courses);
         }
+
+        public IActionResult CourseDetails(int id)
+        {
+            var courseEntity = _context.tblCourses.FirstOrDefault(c => c.Id == id);
+
+            if (courseEntity == null)
+            {
+                return NotFound();
+            }
+
+            var course = new Course
+            {
+                Id = courseEntity.Id,
+                ImgUrl = courseEntity.ImgUrl,
+                Name = courseEntity.Name,
+                Description = courseEntity.Description,
+                Cost = courseEntity.Cost
+            };
+
+            return View(course);
+        }
+
     }
 }
