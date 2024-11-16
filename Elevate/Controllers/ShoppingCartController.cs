@@ -1,10 +1,10 @@
-﻿using Elevate.BL.Models;
-using Elevate.BL;
+﻿using Elevate.BL;
+using Elevate.BL.Models;
 using Elevate.UI.Extensions;
 using Elevate.UI.Models;
+using Elevate.UI.ViewModels;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Elevate.UI.ViewModels;
 
 namespace Elevate.UI.Controllers
 {
@@ -44,10 +44,17 @@ namespace Elevate.UI.Controllers
         public IActionResult Add(int id)
         {
             cart = GetShoppingCart();
+
+            if (cart.Items.Any(item => item.Id == id))
+            {
+                return Json(new { success = false, message = "Item is already in the cart." });
+            }
+
             Course course = CourseManager.LoadById(id);
             ShoppingCartManager.Add(cart, course);
             HttpContext.Session.SetObject("cart", cart);
-            return RedirectToAction(nameof(Index), "Course");
+
+            return Json(new { success = true });
         }
 
         public IActionResult Checkout()
