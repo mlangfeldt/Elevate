@@ -1,12 +1,6 @@
 ﻿using Elevate.BL.Models;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elevate.PL;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Elevate.BL
 {
@@ -30,6 +24,7 @@ namespace Elevate.BL
                     row.Id = dc.tblCourses.Any() ? dc.tblCourses.Max(g => g.Id) + 1 : 1;
                     row.Name = course.Name;
                     row.Description = course.Description;
+                    row.Cost = course.Cost;
 
                     // Backfill the id
                     course.Id = row.Id;
@@ -149,8 +144,8 @@ namespace Elevate.BL
 
                             Id = row.Id,
                             Name = row.Name,
-                            Description = row.Description
-
+                            Description = row.Description,
+                            Cost = row.Cost
 
                         };
                         return course;
