@@ -185,6 +185,19 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/scripts.js" asp-append-version="true"></script>
     <!--console.log("scripts loaded");--!>
+
+            <script>
+        $(document).ready(function() {
+            // Check if the ShowLoginModal flag is set
+        @if (ViewBag.ShowLoginModal != null && ViewBag.ShowLoginModal)
+        {
+            <text>
+                        $('#loginModal').modal('show');
+            </text>
+        }
+        });
+    </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

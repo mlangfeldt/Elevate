@@ -61,16 +61,17 @@ namespace Elevate.UI.Controllers
         {
             if (Authenticate.IsAuthenticated(HttpContext))
             {
-                cart = GetShoppingCart();
+                var cart = GetShoppingCart();
                 ShoppingCartManager.Checkout(cart);
-                //HttpContext.Session.SetObject("cart", null);
-                return RedirectToAction("AssignToCustomer");
+                return View();
             }
-
             else
-                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
-
+            {
+                ViewBag.ShowLoginModal = true;
+                return View("Index", GetShoppingCart());
+            }
         }
+
 
         public IActionResult AssignToCustomer()
         {

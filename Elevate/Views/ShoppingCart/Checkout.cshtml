@@ -3,4 +3,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Thank you for your order!</h1>
+<div class="container text-center py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <h1 class="display-5 mb-4 text-success">Thank You for Your Order!</h1>
+                    <p class="lead mb-4">We have received your order and are currently processing it. You will receive an email confirmation shortly.</p>
+                    <p class="text-muted mb-5">If you have any questions about your order, feel free to <a href="/Home/Contact" class="text-decoration-none">contact us</a>.</p>
+                    <a href="/" class="btn btn-primary btn-lg">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    setTimeout(function () {
+        window.location.href = '/Home/Library'; 
+    }, 2500); 
+</script>
