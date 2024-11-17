@@ -88,11 +88,11 @@
                     if (response.success) {
                         $("#cartMessage").html('<div class="alert alert-success" role="alert">Thank you for adding to cart!</div>');
                     } else {
-                        $("#cartMessage").html('<div class="alert alert-danger" role="alert">Failed to add to cart. Please try again.</div>');
+                        $("#cartMessage").html('<div class="alert alert-danger" role="alert">You cannot add the same course twice, sorry</div>');
                     }
                 },
                 error: function () {
-                    $("#cartMessage").html('<div class="alert alert-danger" role="alert">Failed to add to cart. Please try again.</div>');
+                    $("#cartMessage").html('<div class="alert alert-danger" role="alert">Something went wrong :(</div>');
                 }
             });
         });
