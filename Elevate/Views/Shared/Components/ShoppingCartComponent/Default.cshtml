@@ -1,0 +1,17 @@
+﻿@model Elevate.BL.Models.ShoppingCart
+
+<!-- Shopping Cart Display -->
+@if (Model.Items.Count > 0)
+{
+    <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge bg-primary">@Model.NumberOfItems</span> <!-- Show the number of items in the cart -->
+    </a>
+}
+else
+{
+    <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge bg-secondary">0</span> <!-- Show 0 if the cart is empty -->
+    </a>
+}

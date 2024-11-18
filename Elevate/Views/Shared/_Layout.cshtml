@@ -73,9 +73,7 @@
                             }
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="Index"> 
-                                <i class="fa-solid fa-cart-shopping"></i> Cart
-                            </a>
+                            @await Component.InvokeAsync("ShoppingCartComponent")
                         </li>
                         <li class="nav-item">
                             <!-- Search Bar -->
