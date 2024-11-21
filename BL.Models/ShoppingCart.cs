@@ -24,6 +24,8 @@ namespace Elevate.BL.Models
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Total { get { return SubTotal + Tax; } }
+        public int CustomerId { get; set; }
+        public int UserId { get; set; }
     }
 }
 

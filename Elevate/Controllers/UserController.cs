@@ -1,5 +1,5 @@
-﻿using Elevate.BL.Models;
-using Elevate.BL;
+﻿using Elevate.BL;
+using Elevate.BL.Models;
 using Elevate.UI.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -98,47 +98,61 @@ namespace Elevate.Controllers
             {
                 if (UserManager.Login(user))
                 {
+                    user = UserManager.LoadByEmail(user.Email); // Ensure we have a full user object
                     if (user.EmailConfirmed != 1)
                     {
-
                         TempData["Message"] = "You must confirm your email address before logging in.";
                         SetUser(null);
                         return RedirectToAction("Index");
                     }
                     else
                     {
-                        SetUser(user);
+                        SetUser(user); // Store the UserId in session
                         if (TempData["returnurl"] != null)
                             return Redirect(TempData["returnurl"].ToString());
                         else
                         {
                             ViewBag.Message = "You are now logged in.";
+                            return RedirectToAction("Index", "Home");
                         }
                     }
                 }
-                return RedirectToAction("Index", "Home");
+
+                TempData["Message"] = "Invalid login credentials.";
+                return RedirectToAction("Login");
             }
             catch (Exception ex)
             {
                 TempData["Message"] = ex.Message;
-                ViewBag.Message = ex.Message;
-                return RedirectToAction("Index", "Home"); 
-                //return View(user);
+                return RedirectToAction("Login");
             }
         }
 
+
         private void SetUser(User user)
         {
-            HttpContext.Session.SetObject("user", user);
             if (user != null)
             {
-                HttpContext.Session.SetObject("fullname", "Welcome " + user.FirstName.ToString() + " " + user.LastName.ToString());
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetObject("user", user);
+                HttpContext.Session.SetString("fullname", $"Welcome {user.FirstName} {user.LastName}");
             }
             else
             {
-                HttpContext.Session.SetObject("fullname", "");
-
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("user");
+                HttpContext.Session.Remove("fullname");
             }
+        }
+
+        private int GetUserIdFromSession()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId.HasValue)
+            {
+                return userId.Value;
+            }
+            throw new Exception("User is not authenticated or UserId is missing in session.");
         }
 
         // GET: UserController
@@ -176,7 +190,7 @@ namespace Elevate.Controllers
             {
                 try
                 {
-                    
+
                     // insert new user into db
                     int results = UserManager.Insert(user);
 
@@ -205,7 +219,7 @@ namespace Elevate.Controllers
         public ActionResult Activation()
         {
             ViewBag.Message = "Invalid Confirmation code.";
-            
+
             // if id (ConfirmationCode) is passed to Activation view
             if (RouteData.Values["id"] != null)
             {
@@ -221,7 +235,7 @@ namespace Elevate.Controllers
                     testUser.EmailConfirmed = 1;
 
                     UserManager.Update(testUser);
-                    
+
                     ViewBag.Message = "Email comfirmed, you may now log in.";
                 }
             }

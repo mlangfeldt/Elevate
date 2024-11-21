@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\ShoppingCart\Success.cshtml" />
+    <Content Remove="Views\ShoppingCart\Success1.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -19,6 +24,24 @@
     <ProjectReference Include="..\BL.Models\Elevate.BL.Models.csproj" />
     <ProjectReference Include="..\BL\Elevate.BL.csproj" />
     <ProjectReference Include="..\PL\Elevate.PL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\ShoppingCart\Success.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\ShoppingCart\Success.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\ShoppingCart\Success1.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\ShoppingCart\Success.cshtml" />
+    <None Include="Views\ShoppingCart\Success1.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\ShoppingCart\Success1.cshtml" />
   </ItemGroup>
 
 </Project>

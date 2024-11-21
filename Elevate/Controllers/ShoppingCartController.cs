@@ -2,8 +2,6 @@
 using Elevate.BL.Models;
 using Elevate.UI.Extensions;
 using Elevate.UI.Models;
-using Elevate.UI.ViewModels;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elevate.UI.Controllers
@@ -11,6 +9,22 @@ namespace Elevate.UI.Controllers
     public class ShoppingCartController : Controller
     {
         ShoppingCart cart;
+
+        private int GetUserIdFromContext()
+        {
+            var userIdSession = HttpContext.Session.GetInt32("UserId");
+            if (userIdSession.HasValue)
+            {
+                return userIdSession.Value;
+            }
+
+            throw new Exception("User is not authenticated or UserId is missing.");
+        }
+
+        private void ClearShoppingCart()
+        {
+            HttpContext.Session.Remove("ShoppingCart");
+        }
 
         // GET: ShoppingCartController
         public IActionResult Index()
@@ -36,24 +50,28 @@ namespace Elevate.UI.Controllers
         {
             cart = GetShoppingCart();
             Course course = cart.Items.FirstOrDefault(i => i.Id == id);
-            ShoppingCartManager.Remove(cart, course);
-            HttpContext.Session.SetObject("cart", cart);
+            if (course != null)
+            {
+                ShoppingCartManager.Remove(cart, course);
+                HttpContext.Session.SetObject("cart", cart);
+            }
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Add(int id)
         {
             cart = GetShoppingCart();
-
             if (cart.Items.Any(item => item.Id == id))
             {
                 return Json(new { success = false, message = "Item is already in the cart." });
             }
 
             Course course = CourseManager.LoadById(id);
-            ShoppingCartManager.Add(cart, course);
-            HttpContext.Session.SetObject("cart", cart);
-
+            if (course != null)
+            {
+                ShoppingCartManager.Add(cart, course);
+                HttpContext.Session.SetObject("cart", cart);
+            }
             return Json(new { success = true });
         }
 
@@ -61,9 +79,14 @@ namespace Elevate.UI.Controllers
         {
             if (Authenticate.IsAuthenticated(HttpContext))
             {
+                int userId = GetUserIdFromContext();
                 var cart = GetShoppingCart();
-                ShoppingCartManager.Checkout(cart);
-                return View();
+
+                ShoppingCartManager.Checkout(cart, userId);
+                ClearShoppingCart();
+
+                // Redirect to a success view
+                return View("~/Views/ShoppingCart/Success.cshtml");
             }
             else
             {
@@ -73,51 +96,10 @@ namespace Elevate.UI.Controllers
         }
 
 
-        public IActionResult AssignToCustomer()
-        {
-            // Check to see if the user is logged in
-            if (Authenticate.IsAuthenticated(HttpContext))
-            {
-                // Create a CustomerViewModel and customer
-                CustomerViewModel customerVM = new CustomerViewModel();
-                Customer customer = new Customer();
-                customerVM.Customers = CustomerManager.Load();
-                customerVM.UserId = customer.UserId;
 
-                customerVM.Cart = GetShoppingCart();
 
-                customerVM.CustomerId = customer.Id;
 
-                HttpContext.Session.SetObject("customerVM", customerVM);
 
-                ViewData["ReturnUrl"] = UriHelper.GetDisplayUrl(HttpContext.Request);
 
-                return View(customerVM);
-            }
-
-            else
-                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
-        }
-
-        [HttpPost]
-        public IActionResult AssignToCustomer(CustomerViewModel customerVM)
-        {
-            try
-            {
-
-                customerVM.Cart = GetShoppingCart();
-
-                ShoppingCartManager.Checkout(customerVM.Cart);
-
-                HttpContext.Session.SetObject("cart", null);
-
-                return View("Checkout");
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
     }
 }

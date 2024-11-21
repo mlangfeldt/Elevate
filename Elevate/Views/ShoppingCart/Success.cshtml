@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container text-center mt-5">
+    <div class="card shadow-lg p-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-center">
+                <!-- Success Icon -->
+                <div class="icon text-success mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 10.97l-3.47-3.47a.75.75 0 1 1 1.06-1.06L7 9.44l4.47-4.47a.75.75 0 0 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0z" />
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-success mb-3">Success!</h1>
+            <p class="lead">Your order has been completed successfully. Thank you for shopping with us!</p>
+            <p>If you have any questions, feel free to <a href="/Contact">contact us</a>.</p>
+            <div class="mt-4">
+                <a href="/" class="btn btn-primary btn-lg">Return to Home</a>
+                <a href="/ShoppingCart" class="btn btn-outline-secondary btn-lg">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+</style>

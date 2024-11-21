@@ -1,9 +1,4 @@
 ﻿using Elevate.BL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Elevate.BL
 {
@@ -17,34 +12,28 @@ namespace Elevate.BL
         {
             cart.Items.Remove(course);
         }
-        public static void Checkout(ShoppingCart cart)
+        public static void Checkout(ShoppingCart cart, int userId)
         {
             try
             {
-                Order order = new Order
+                foreach (Course course in cart.Items)
                 {
-                    CustomerId = 1,
-                    OrderDate = DateTime.Now,
-                    UserId = 1,
-                    OrderItems = new List<OrderItem>()
-                };
-                foreach (Course item in cart.Items)
-                {
-                    OrderItem orderItem = new OrderItem
+
+                    Collection collection = new Collection
                     {
-                        OrderId = order.Id,
-                        CourseId = item.Id,
-                        Quantity = 1,
-                        Cost = item.Cost
+                        CourseId = course.Id,
+                        UserId = userId
                     };
-                    order.OrderItems.Add(orderItem);
+
+                    CollectionManager.Insert(collection);
                 }
-                OrderManager.Insert(order);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("An error occurred during checkout: " + ex.Message, ex);
             }
         }
+
+
     }
 }
