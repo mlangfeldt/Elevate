@@ -28,7 +28,8 @@
                 </div>
             </div>
         </section>
-         
+
+              
         <!-- Additional Information Section -->
         <section class="py-5">
             <div class="container px-5">
@@ -59,6 +60,41 @@
             </div>
         </section>
     </main>
+    <!-- Reviews Section -->
+    <section class="py-5">
+        <div class="container px-5">
+            <h3 class="text-center mb-4">Course Reviews for @Model.Name</h3>
+
+            <!-- Iterate through reviews passed from controller -->
+            @if (ViewData["Reviews"] != null)
+            {
+                var reviews = (IEnumerable<dynamic>)ViewData["Reviews"];
+                foreach (var review in reviews)
+                {
+                    <div class="review-footer mb-4">
+                        <div class="review-card border p-4 rounded shadow-sm">
+                            <div class="star-rating mb-3">
+                                @for (int i = 0; i < review.Rating; i++)
+                                {
+                                    <label class="star filled">★</label>
+                                }
+                                @for (int i = review.Rating; i < 5; i++)
+                                {
+                                    <label class="star">★</label>
+                                }
+                            </div>
+                            <p>@review.ReviewText</p>
+                            <strong>- @review.ReviewerName</strong>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No reviews yet. Be the first to review this course!</p>
+            }
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-dark py-4 mt-auto">
