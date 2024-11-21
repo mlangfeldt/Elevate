@@ -18,7 +18,7 @@ namespace Elevate.BL
             {
                 // 7135
                 Port = 587,
-                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "amwu gsoa mimh hoyn"),
+                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "zwle jjjq ogmo tqkp"),
                 EnableSsl = true,
             };
 
@@ -37,7 +37,7 @@ namespace Elevate.BL
             {
                 // 7135
                 Port = 587,
-                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "amwu gsoa mimh hoyn"),
+                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "zwle jjjq ogmo tqkp"),
                 EnableSsl = true,
 
             };
