@@ -86,7 +86,7 @@ namespace Elevate.UI.Controllers
                 ClearShoppingCart();
 
                 // Redirect to a success view
-                return View("~/Views/ShoppingCart/Success.cshtml");
+                return View();
             }
             else
             {

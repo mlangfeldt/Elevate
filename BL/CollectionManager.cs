@@ -111,6 +111,32 @@ namespace Elevate.BL
             }
         }
 
+        public static List<Course> GetCoursesByUserId(int userId)
+        {
+            try
+            {
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    var courses = (from collection in dc.tblCollections
+                                   join course in dc.tblCourses on collection.CourseId equals course.Id
+                                   where collection.UserId == userId
+                                   select new Course
+                                   {
+                                       Id = course.Id,
+                                       ImgUrl = course.ImgUrl,
+                                       Name = course.Name,
+                                       Description = course.Description,
+                                       Cost = course.Cost
+                                   }).ToList();
+
+                    return courses;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static Collection LoadById(int id)
         {
             try
