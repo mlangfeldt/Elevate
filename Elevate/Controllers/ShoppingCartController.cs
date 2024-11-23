@@ -12,6 +12,8 @@ namespace Elevate.UI.Controllers
     {
         ShoppingCart cart;
 
+        User user;
+
         // GET: ShoppingCartController
         public IActionResult Index()
         {
@@ -20,8 +22,22 @@ namespace Elevate.UI.Controllers
             return View(cart);
         }
 
+
+        private User GetUser()
+        {
+            if (HttpContext.Session.GetObject<User>("user") != null)
+            {
+                return HttpContext.Session.GetObject<User>("user");
+            }
+            else
+            {
+                return new User();
+            }
+        }
+
         private ShoppingCart GetShoppingCart()
         {
+
             if (HttpContext.Session.GetObject<ShoppingCart>("cart") != null)
             {
                 return HttpContext.Session.GetObject<ShoppingCart>("cart");
@@ -62,7 +78,10 @@ namespace Elevate.UI.Controllers
             if (Authenticate.IsAuthenticated(HttpContext))
             {
                 var cart = GetShoppingCart();
-                ShoppingCartManager.Checkout(cart);
+                var user = GetUser();
+
+                ShoppingCartManager.Checkout(cart, user);
+
                 return View();
             }
             else
@@ -107,7 +126,7 @@ namespace Elevate.UI.Controllers
 
                 customerVM.Cart = GetShoppingCart();
 
-                ShoppingCartManager.Checkout(customerVM.Cart);
+                ShoppingCartManager.Checkout(customerVM.Cart, user);
 
                 HttpContext.Session.SetObject("cart", null);
 

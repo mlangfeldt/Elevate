@@ -75,6 +75,7 @@
     <None Include="PostDeploy\DefaultData\Orders.sql" />
     <None Include="PostDeploy\DefaultData\OrderItems.sql" />
     <None Include="Elevate.DB.publish.xml" />
+    <None Include="local.Elevate.DB.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblCollection.sql" />

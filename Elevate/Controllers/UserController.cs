@@ -192,6 +192,7 @@ namespace Elevate.Controllers
                     EmailService.SendConfirmationCodeEmail(body, user.Email, user.ConfirmationCode);
 
                     TempData["Message"] = "Signup successful! Please check your email for a confirmation link.";
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch

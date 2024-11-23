@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using Elevate.BL.Models;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Mail;
 
 namespace Elevate.BL
@@ -6,7 +8,7 @@ namespace Elevate.BL
 
     // L: fvtcelevate@gmail.com
     // P: FVTCelevate2024
-    // App Password: amwu gsoa mimh hoyn
+    // App Password: zwle jjjq ogmo tqkp
 
     public class EmailService
     {
@@ -18,7 +20,7 @@ namespace Elevate.BL
             {
                 // 7135
                 Port = 587,
-                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "amwu gsoa mimh hoyn"),
+                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "zwle jjjq ogmo tqkp"),
                 EnableSsl = true,
             };
 
@@ -37,7 +39,8 @@ namespace Elevate.BL
             {
                 // 7135
                 Port = 587,
-                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "amwu gsoa mimh hoyn"),
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "zwle jjjq ogmo tqkp"),
                 EnableSsl = true,
 
             };
@@ -47,6 +50,31 @@ namespace Elevate.BL
             mailMessage.From = new MailAddress("fvtcelevate@gmail.com");
             mailMessage.To.Add(email);
             mailMessage.Subject = "Welcome to Elevate - Please confirm your e-mail address.";
+            mailMessage.IsBodyHtml = true;
+            mailMessage.Body = body;
+
+            smtpClient.Send(mailMessage);
+
+        }
+
+        public static void SendReceiptEmail(string email, string subject, string body)
+        {
+       
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                // 7135
+                Port = 587,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("fvtcelevate@gmail.com", "zwle jjjq ogmo tqkp"),
+                EnableSsl = true,
+
+            };
+
+            MailMessage mailMessage = new MailMessage();
+
+            mailMessage.From = new MailAddress("fvtcelevate@gmail.com");
+            mailMessage.To.Add(email);
+            mailMessage.Subject = subject;
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = body;
 
