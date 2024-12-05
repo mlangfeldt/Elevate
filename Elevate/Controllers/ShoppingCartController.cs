@@ -23,7 +23,7 @@ namespace Elevate.UI.Controllers
 
         private void ClearShoppingCart()
         {
-            HttpContext.Session.Remove("ShoppingCart");
+            HttpContext.Session.Remove("cart");
         }
 
         // GET: ShoppingCartController
