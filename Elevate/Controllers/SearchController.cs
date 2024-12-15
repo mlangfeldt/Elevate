@@ -13,8 +13,13 @@ namespace Elevate.UI.Controllers
             {"debt management", "/Courses/CourseDetails/2" },
             {"investment", "/Courses/CourseDetails/3" },
             {"retirement", "/Courses/CourseDetails/4" },
-            {"debt leverage", "/Courses/CourseDetails/5" },
-            {"day trading", "/Courses/CourseDetails/6" }
+            {"cryptocurrency", "/Courses/CourseDetails/5" },
+            {"debt leverage", "/Courses/CourseDetails/6" },
+            {"investment diversification", "/Courses/CourseDetails/7" },
+            {"retirement income", "/Courses/CourseDetails/8" },
+            {"financial literacy", "/Courses/CourseDetails/9" },
+            {"credit loans", "/Courses/CourseDetails/10" }
+
         };
 
         [HttpGet("/search")]
