@@ -80,7 +80,7 @@ namespace Elevate.BL
                 ReceiptBody += "<br /><br /><div style='margin: auto; font-size: 24pt; font-weight: bold;'>" + ReceiptCustomer.FirstName + ", Elevate thanks you for your order!</div><br /><br />";
 
                 //order information
-                ReceiptBody += "<div style='color:#ffffff; float: left; width: 100%; background-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(13, 110, 253, 1) 100%); padding: 10px 10px 10px 10px;'>";
+                ReceiptBody += "<div style='border-radius: 15px; color:#ffffff; float: left; width: 100%; background-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(13, 110, 253, 1) 100%); padding: 10px 10px 10px 10px;'>";
                 ReceiptBody += "<div style='width: 50%; float: left;'><p style='font-weight: bold; margin:0;'>Elevate, inc.</p><p style='font-weight: bold;margin:0;'>1825 N Bluemound Dr</p><p style='font-weight: bold;margin:0;'>Appleton, WI 54914</p></div>";
                 ReceiptBody += "<div id='centered' style = 'margin: 0 auto; width:100%;'>";
                 ReceiptBody += "<div style='width: 50%; float: right;'><p style='font-weight: bold; margin:0;'>Order #: " + ReceiptOrder.Id.ToString("00000") +
@@ -97,7 +97,7 @@ namespace Elevate.BL
                 ReceiptBody += "<div style=\"font-weight: bold; width: 20%; float:left;\">" + "Cost" + "</div>";
 
                 // horizontal rule
-                ReceiptBody += "<div style='width: 100%;'><hr style='background-color:#000000;border-width:0;color:#000000;height:1px;line-height:0;text-align:left;width:100%;'/></div>";
+                ReceiptBody += "<div style='width: 100%;'><hr style='background-color:#c0c0c0;border-width:0;color:#000000;height:1px;line-height:0;text-align:left;width:100%;'/></div>";
 
                 foreach (Course item in cart.Items)
                 {
@@ -117,7 +117,7 @@ namespace Elevate.BL
                 }
 
                 //horizontal rule
-                ReceiptBody += "<div style='width: 100%;'><hr style='background-color:#000000;border-width:0;color:#000000;height:1px;line-height:0;text-align:left;width:100%;'/></div>";
+                ReceiptBody += "<div style='width: 100%;'><hr style='background-color:#c0c0c0;border-width:0;color:#000000;height:1px;line-height:0;text-align:left;width:100%;'/></div>";
 
                 //subtotal, tax, and total
                 ReceiptBody += "<div style='font-size: 12pt; width: 80%;'></div><div style='font-weight: bold; width: 20%; float:right;'>Sub Total: " + cart.SubTotal.ToString("C") + "</div><br />";
@@ -127,7 +127,7 @@ namespace Elevate.BL
                 ReceiptBody += "<br /><br />";
 
                 //footer
-                ReceiptBody += "</div><div style='font-size: 12pt; width: 100%; margin: auto; font-weight: normal;'> &copy; 2024 Entity, inc.</div></div>";
+                ReceiptBody += "</div><div style='font-size: 12pt; width: 100%; margin: auto; font-weight: normal;'> &copy; 2024 Elevate, inc.</div></div>";
 
                 string ReceiptEmail = ReceiptCustomer.Email;
 
