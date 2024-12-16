@@ -1,10 +1,4 @@
 ﻿using Elevate.BL.Models;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Elevate.BL
 {
@@ -22,7 +16,7 @@ namespace Elevate.BL
         {
             try
             {
-                
+
                 User ReceiptUser = user;
 
                 Customer ReceiptCustomer = new Customer();
@@ -31,31 +25,43 @@ namespace Elevate.BL
                 bool FoundCustomer = CustomerManager.FindByUserId(user.Id);
 
                 // if found load into ReceiptCustomer
-                if (FoundCustomer) 
-                { 
-                    ReceiptCustomer = CustomerManager.LoadByUserId(user.Id); 
+                if (FoundCustomer)
+                {
+                    ReceiptCustomer = CustomerManager.LoadByUserId(user.Id);
                 }
                 // otherwise insert new Customer into db
                 else
                 {
                     ReceiptCustomer.FirstName = ReceiptUser.FirstName;
-                    ReceiptCustomer.LastName = ReceiptUser.LastName;   
+                    ReceiptCustomer.LastName = ReceiptUser.LastName;
                     ReceiptCustomer.Email = ReceiptUser.Email;
                     ReceiptCustomer.UserId = ReceiptUser.Id;
 
                     CustomerManager.Insert(ReceiptCustomer);
-                    
+
                 }
 
                 Order ReceiptOrder = new Order
                 {
-                    
+
                     CustomerId = ReceiptCustomer.Id,
                     OrderDate = DateTime.Now,
                     UserId = ReceiptCustomer.UserId,
                     OrderItems = new List<OrderItem>()
 
                 };
+
+                foreach (Course course in cart.Items)
+                {
+
+                    Collection collection = new Collection
+                    {
+                        CourseId = course.Id,
+                        UserId = ReceiptCustomer.UserId
+                    };
+
+                    CollectionManager.Insert(collection);
+                }
 
                 foreach (Course item in cart.Items)
                 {
@@ -72,8 +78,8 @@ namespace Elevate.BL
 
                 OrderManager.Insert(ReceiptOrder);
 
-                string ReceiptBody = 
-                    
+                string ReceiptBody =
+
                 ReceiptBody = "<div id='header' style='font-family: Arial, Helvetica, sans-serif; font-size: 14pt; width: 1000px; margin: 0 auto;'>";
 
                 //greeting
@@ -121,8 +127,8 @@ namespace Elevate.BL
 
                 //subtotal, tax, and total
                 ReceiptBody += "<div style='font-size: 12pt; width: 80%;'></div><div style='font-weight: bold; width: 20%; float:right;'>Sub Total: " + cart.SubTotal.ToString("C") + "</div><br />";
-                ReceiptBody += "<div style='font-size: 12pt; width: 80%;'></div><div style='font-weight: bold; width: 20%; float:right;'>Tax: " + cart.Tax.ToString("C") + "</div><br />"; 
-                ReceiptBody += "<div style='font-size: 12pt; width: 80%;'></div><div style='font-weight: bold; width: 20%; float:right;'>Total: " +  cart.Total.ToString("C") + "</div><br />";
+                ReceiptBody += "<div style='font-size: 12pt; width: 80%;'></div><div style='font-weight: bold; width: 20%; float:right;'>Tax: " + cart.Tax.ToString("C") + "</div><br />";
+                ReceiptBody += "<div style='font-size: 12pt; width: 80%;'></div><div style='font-weight: bold; width: 20%; float:right;'>Total: " + cart.Total.ToString("C") + "</div><br />";
 
                 ReceiptBody += "<br /><br />";
 
@@ -132,7 +138,7 @@ namespace Elevate.BL
                 string ReceiptEmail = ReceiptCustomer.Email;
 
                 string ReceiptSubject = ReceiptCustomer.FirstName + ", Elevate thanks you for your purchase! Order #" + ReceiptOrder.Id.ToString("00000");
-                
+
                 EmailService.SendReceiptEmail(ReceiptEmail, ReceiptSubject, ReceiptBody);
 
             }
