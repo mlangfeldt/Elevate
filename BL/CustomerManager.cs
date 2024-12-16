@@ -1,6 +1,7 @@
 ﻿using Elevate.BL.Models;
 using Elevate.PL;
 using Microsoft.EntityFrameworkCore.Storage;
+using NuGet.Protocol.Plugins;
 
 namespace Elevate.BL
 {
@@ -77,6 +78,37 @@ namespace Elevate.BL
                 throw ex;
             }
         }
+
+        public static bool FindByUserId(int userid)
+        {
+            
+            bool CustomerFound = false;
+
+            try
+            {
+                
+
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    tblCustomer row = dc.tblCustomers.Where(s => s.UserId == userid).FirstOrDefault();
+
+                    if (row != null)
+                    {
+                        CustomerFound = true;
+                        
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return CustomerFound;
+
+        }
         public static Customer LoadById(int id)
         {
             try
@@ -94,6 +126,40 @@ namespace Elevate.BL
                             FirstName = row.FirstName,
                             LastName = row.LastName,
                             UserId = row.UserId
+                        };
+                    }
+                    else
+                    {
+                        throw new Exception("Row does not exist.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public static Customer LoadByUserId(int userid)
+        {
+            try
+            {
+
+                using (ElevateEntities dc = new ElevateEntities())
+                {
+                    tblCustomer row = dc.tblCustomers.Where(s => s.UserId == userid).FirstOrDefault();
+
+                    if (row != null)
+                    {
+                        return new Customer
+                        {
+                            Id = row.Id,
+                            FirstName = row.FirstName,
+                            LastName = row.LastName,
+                            UserId = row.UserId,
+                            Email = row.Email
+                            
                         };
                     }
                     else
