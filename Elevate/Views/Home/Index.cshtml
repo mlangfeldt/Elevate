@@ -9,7 +9,7 @@
         <header>
             <div class="container text-center my-5">
                 <h1>Welcome to Elevate</h1>
-                <p>Explore our featured courses and learn more about financial planning and investment.</p>
+                <p>Unlock your potential with our expertly crafted courses, designed to equip you with essential skills and practical knowledge. Whether you're looking to improve your financial literacy, plan for retirement, or build a solid investment strategy, our courses provide step-by-step guidance to help you succeed.</p>
                 @if (!string.IsNullOrEmpty(TempData["Message"] as string))
                 {
                     <div class="alert alert-success" role="alert">
@@ -28,7 +28,7 @@
                         <div class="col-lg-3 mb-5">
                             <div class="card d-flex flex-column">
                                 <a href="@Url.Action("CourseDetails", "Home", new { id = course.Id })">
-                                    <img class="card-img-top image-pop" src="~/images/@course.ImgUrl" alt="@course.Name" style="width: 100%; height: auto;" />
+                                    <img class="card-img-top image-pop" src="~/images/@course.ImgUrl" alt="@course.Name" style="width: 300px; height: auto;" />
                                 </a>
                                 <div class="card-body p-4">
                                     <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("CourseDetails", "Courses", new { id = course.Id })">
@@ -76,3 +76,4 @@
         </div>
     </footer>
 </body>
+
