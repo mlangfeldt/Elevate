@@ -10849,7 +10849,7 @@ html {
 
 
 .custom-navbar {
-    background: linear-gradient(to right, rgba(13, 110, 253, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background-color: rgba(13, 110, 253, var(--bs-bg-opacity, 1));
     display: flex;
     align-items: center;
 }
